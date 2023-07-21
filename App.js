@@ -1,7 +1,7 @@
 import {useEffect, useState} from "react";
 import * as Location from 'expo-location';
 import {LocationDenied} from "./components/screens/LocationDenied";
-import {WelcomeScreen} from "./components/screens/WelcomeScreen";
+import {MapScreen} from "./components/screens/MapScreen";
 import {SplashScreen} from "./components/screens/splashScreen/SplashScreen";
 
 export default function App() {
@@ -27,7 +27,7 @@ export default function App() {
     )
   } else if(location) {
     return (
-        <WelcomeScreen/>
+        <MapScreen location={location}/>
     )
   } else {
     return (
