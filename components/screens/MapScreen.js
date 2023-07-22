@@ -10,6 +10,33 @@ export function MapScreen(props) {
         longitude: 0
     })
 
+    const data = [
+        {
+            id: 1,
+            latitude: 1,
+            longitude: 1
+        },
+        {
+            id: 2,
+            latitude: 2,
+            longitude: 2
+        },
+        {
+            id: 3,
+            latitude: 3,
+            longitude: 3
+        }
+    ]
+
+    function mapMarkers() {
+        return data.map((entry) =>
+            <Marker
+                key={entry.id}
+                coordinate={{ latitude: entry.latitude, longitude: entry.longitude }}
+            />
+        )
+    }
+
     return (
         <View style={styles.container}>
             <GooglePlacesAutocomplete
@@ -51,12 +78,11 @@ export function MapScreen(props) {
                     longitudeDelta: 0.05
                 }}
             >
-                <Marker
-                    coordinate={{
-                        latitude: destination.latitude,
-                        longitude: destination.longitude,
-                    }}
-                />
+                {mapMarkers()}
+                <Marker coordinate={{
+                    latitude: destination.latitude,
+                    longitude: destination.longitude
+                }}/>
             </MapView>
         </View>
     );
