@@ -1,38 +1,40 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from "react-native";
 import {GooglePlacesAutocomplete} from "react-native-google-places-autocomplete";
 import {googleMapsConfig} from "../../config/GoogleMapsConfig";
 import MapView, {Marker} from "react-native-maps";
+import axios from "axios";
 
 export function MapScreen(props) {
     const [destination, setDestination] = useState({
         latitude: 0,
         longitude: 0
     })
+    const [data, setData] = useState([])
 
-    const data = [
-        {
-            id: 1,
-            latitude: 1,
-            longitude: 1
-        },
-        {
-            id: 2,
-            latitude: 2,
-            longitude: 2
-        },
-        {
-            id: 3,
-            latitude: 3,
-            longitude: 3
-        }
-    ]
+    useEffect(() => {
+        axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json', {
+            params: {
+                query: 'halal',
+                location: `${props.location.coords.latitude}, ${props.location.coords.longitude}`,
+                key: googleMapsConfig.API_KEY,
+            }
+        })
+            .then((response) => {
+                console.log(response.data.results)
+                setData(response.data.results)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }, [])
 
     function mapMarkers() {
-        return data.map((entry) =>
+        return data.map((place) =>
             <Marker
-                key={entry.id}
-                coordinate={{ latitude: entry.latitude, longitude: entry.longitude }}
+                key={place.place_id}
+                coordinate={{ latitude: place.geometry.location.lat, longitude: place.geometry.location.lng }}
+                title={place.name}
             />
         )
     }
