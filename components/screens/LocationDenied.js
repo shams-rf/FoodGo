@@ -1,5 +1,5 @@
 import React from 'react';
-import {Text, TouchableOpacity, View, Linking} from "react-native";
+import {Text, TouchableOpacity, View, Linking, Platform} from "react-native";
 import AnimatedLottieView from "lottie-react-native";
 import {lottieConfig} from "../../assets/SplashScreen/LottieConfig";
 
@@ -13,7 +13,7 @@ export function LocationDenied() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Oops!</Text>
-            <AnimatedLottieView style={styles.animation} autoPlay loop source={lottieConfig.locationDenied}/>
+            {/*<AnimatedLottieView style={styles.animation} autoPlay loop source={lottieConfig.locationDenied}/>*/}
             <Text style={styles.message}>Looks like we don't location access</Text>
             <TouchableOpacity style={styles.button} onPress={openLocationSettings}>
                 <Text style={styles.message}>Go to location settings</Text>
@@ -41,7 +41,7 @@ const styles = {
     },
     message: {
         fontSize: 18,
-        fontFamily: 'Avenir',
+        fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
         color: '#fff',
     },
     button: {

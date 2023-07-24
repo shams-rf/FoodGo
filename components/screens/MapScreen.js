@@ -1,15 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from "react-native";
-import {GooglePlacesAutocomplete} from "react-native-google-places-autocomplete";
 import {googleMapsConfig} from "../../config/GoogleMapsConfig";
 import MapView, {Marker} from "react-native-maps";
 import axios from "axios";
 
 export function MapScreen(props) {
-    const [destination, setDestination] = useState({
-        latitude: 0,
-        longitude: 0
-    })
     const [data, setData] = useState([])
 
     useEffect(() => {
@@ -41,34 +36,9 @@ export function MapScreen(props) {
 
     return (
         <View style={styles.container}>
-            <GooglePlacesAutocomplete
-                placeholder='Search'
-                fetchDetails={true}
-                GooglePlacesSearchQuery={{
-                    rankby: 'distance'
-                }}
-                onPress={(data, details = null) => {
-                    setDestination({
-                        latitude: details.geometry.location.lat,
-                        longitude: details.geometry.location.lng,
-                        latitudeDelta: 0.2,
-                        longitudeDelta: 0.2
-                    })
-                }}
-                query={{
-                    key: googleMapsConfig.API_KEY,
-                    language: 'en',
-                    types: 'restaurant',
-                    radius: 10000,
-                    components: 'country:ie',
-                    location: `${props.location.coords.latitude}, ${props.location.coords.longitude}`
-                }}
-                styles={{
-                    container: styles.searchBarContainer,
-                    listView: {backgroundColor: 'white'}
-                }}
-            />
             <MapView
+                showsMyLocationButton={false}
+                toolbarEnabled={false}
                 provider={'google'}
                 followsUserLocation={true}
                 showsUserLocation={true}
@@ -81,10 +51,6 @@ export function MapScreen(props) {
                 }}
             >
                 {mapMarkers()}
-                <Marker coordinate={{
-                    latitude: destination.latitude,
-                    longitude: destination.longitude
-                }}/>
             </MapView>
         </View>
     );
