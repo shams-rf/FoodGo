@@ -1,8 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from "react-native";
-import {googleMapsConfig} from "../../config/GoogleMapsConfig";
-import MapView, {Marker} from "react-native-maps";
+import {googleMapsConfig} from "../../../config/GoogleMapsConfig";
+import MapView from "react-native-maps";
 import axios from "axios";
+import {CustomMarker} from "./CustomMarker";
+import {LocateMeButton} from "./LocateMeButton";
 
 export function MapScreen(props) {
     const [data, setData] = useState([])
@@ -24,19 +26,10 @@ export function MapScreen(props) {
             })
     }, [])
 
-    function mapMarkers() {
-        return data.map((place) =>
-            <Marker
-                key={place.place_id}
-                coordinate={{ latitude: place.geometry.location.lat, longitude: place.geometry.location.lng }}
-                title={place.name}
-            />
-        )
-    }
-
     return (
         <View style={styles.container}>
             <MapView
+                ref={(ref) => this.mapView = ref}
                 showsMyLocationButton={false}
                 toolbarEnabled={false}
                 provider={'google'}
@@ -50,8 +43,13 @@ export function MapScreen(props) {
                     longitudeDelta: 0.05
                 }}
             >
-                {mapMarkers()}
+                {data.map((place) => {
+                    return (
+                        <CustomMarker key={place.place_id} place={place} mapView={this.mapView}/>
+                    )
+                })}
             </MapView>
+            <LocateMeButton mapView={this.mapView} location={props.location}/>
         </View>
     );
 }
