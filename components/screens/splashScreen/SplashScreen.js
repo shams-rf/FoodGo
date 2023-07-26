@@ -1,12 +1,11 @@
 import React from 'react';
-import {lottieConfig} from "../../../assets/SplashScreen/LottieConfig";
-import AnimatedLottieView from "lottie-react-native";
-import {Platform, Text, View} from "react-native";
+import {Image, Platform, Text, View} from "react-native";
+import location from '../../../assets/icons/location.gif';
 
 export function SplashScreen() {
     return (
         <View style={styles.container}>
-            {/*<AnimatedLottieView style={styles.animation} autoPlay loop source={lottieConfig.loading}/>*/}
+            <Image style={{width: 300, height: 300}} source={location}/>
             <Text style={styles.loadingText}>Please wait while we locate you!</Text>
         </View>
     );

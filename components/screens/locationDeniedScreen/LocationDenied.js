@@ -1,7 +1,6 @@
 import React from 'react';
-import {Text, TouchableOpacity, View, Linking, Platform} from "react-native";
-import AnimatedLottieView from "lottie-react-native";
-import {lottieConfig} from "../../../assets/SplashScreen/LottieConfig";
+import {Text, TouchableOpacity, View, Linking, Platform, Image} from "react-native";
+const sad = require('../../../assets/icons/warning.gif');
 
 export function LocationDenied() {
     function openLocationSettings() {
@@ -13,7 +12,7 @@ export function LocationDenied() {
     return (
         <View style={styles.container}>
             <Text style={styles.title}>Oops!</Text>
-            {/*<AnimatedLottieView style={styles.animation} autoPlay loop source={lottieConfig.locationDenied}/>*/}
+            <Image style={{height: 300, width: 300}} source={sad}/>
             <Text style={styles.message}>Looks like we don't location access</Text>
             <TouchableOpacity style={styles.button} onPress={openLocationSettings}>
                 <Text style={styles.message}>Go to location settings</Text>
