@@ -1,7 +1,7 @@
 import React from 'react';
 import {Text, TouchableOpacity, View, Linking, Platform} from "react-native";
 import AnimatedLottieView from "lottie-react-native";
-import {lottieConfig} from "../../assets/SplashScreen/LottieConfig";
+import {lottieConfig} from "../../../assets/SplashScreen/LottieConfig";
 
 export function LocationDenied() {
     function openLocationSettings() {

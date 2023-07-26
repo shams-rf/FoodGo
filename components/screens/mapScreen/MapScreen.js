@@ -5,9 +5,12 @@ import MapView from "react-native-maps";
 import axios from "axios";
 import {CustomMarker} from "./CustomMarker";
 import {LocateMeButton} from "./LocateMeButton";
+import {MiniPlaceCard} from "../placeCard/MiniPlaceCard";
 
 export function MapScreen(props) {
     const [data, setData] = useState([])
+    const [spot, setSpot] = useState(null)
+    const [showPlaceCard, setShowPlaceCard] = useState(false)
 
     useEffect(() => {
         axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json', {
@@ -18,7 +21,6 @@ export function MapScreen(props) {
             }
         })
             .then((response) => {
-                console.log(response.data.results)
                 setData(response.data.results)
             })
             .catch((error) => {
@@ -45,11 +47,17 @@ export function MapScreen(props) {
             >
                 {data.map((place) => {
                     return (
-                        <CustomMarker key={place.place_id} place={place} mapView={this.mapView}/>
+                        <CustomMarker
+                            setShowPlaceCard={setShowPlaceCard}
+                            setSpot={setSpot}
+                            key={place.place_id}
+                            place={place}
+                            mapView={this.mapView}/>
                     )
                 })}
             </MapView>
-            <LocateMeButton mapView={this.mapView} location={props.location}/>
+            <LocateMeButton setShowPlaceCard={setShowPlaceCard} mapView={this.mapView} location={props.location}/>
+            <MiniPlaceCard showCard={showPlaceCard} place={spot}/>
         </View>
     );
 }

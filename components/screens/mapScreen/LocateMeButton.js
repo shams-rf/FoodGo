@@ -5,6 +5,7 @@ import {constants} from '../../../config/Constants';
 
 export function LocateMeButton(props) {
     function focusLocation() {
+        props.setShowPlaceCard(false)
         let r = {
             latitude: props.location.coords.latitude,
             longitude: props.location.coords.longitude,

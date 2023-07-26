@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
 import * as Location from 'expo-location';
-import {LocationDenied} from "./components/screens/LocationDenied";
+import {LocationDenied} from "./components/screens/locationDeniedScreen/LocationDenied";
 import {MapScreen} from "./components/screens/mapScreen/MapScreen";
 import {SplashScreen} from "./components/screens/splashScreen/SplashScreen";
 

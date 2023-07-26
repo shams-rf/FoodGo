@@ -4,7 +4,10 @@ import {CustomCallout} from "./CustomCallout";
 const markerImg = require('../../../assets/icons/marker.png')
 
 export function CustomMarker(props) {
+    console.log(props.place)
     function focusMarker() {
+        props.setShowPlaceCard(true)
+        props.setSpot(props.place)
         let r = {
             latitude: props.place.geometry.location.lat,
             longitude: props.place.geometry.location.lng,
