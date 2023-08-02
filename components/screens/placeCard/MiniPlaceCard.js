@@ -1,9 +1,7 @@
 import React from 'react';
-import {Platform, Text, TouchableOpacity, View} from "react-native";
+import {Platform, Text, View} from "react-native";
 import {Chip} from "react-native-paper";
 import {Rating} from "react-native-ratings";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {constants} from "../../../config/Constants";
 import {DirectionsButton} from "./DirectionsButton";
 
 export function MiniPlaceCard(props) {
