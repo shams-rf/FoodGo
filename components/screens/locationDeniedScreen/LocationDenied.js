@@ -31,7 +31,7 @@ const styles = {
     title: {
         fontSize: 32,
         fontWeight: 'bold',
-        fontFamily: 'Avenir',
+        fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
         color: '#fff',
         marginBottom: '20%'
     },

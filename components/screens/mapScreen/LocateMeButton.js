@@ -5,7 +5,6 @@ import {constants} from '../../../config/Constants';
 
 export function LocateMeButton(props) {
     function focusLocation() {
-        props.setShowPlaceCard(false)
         let r = {
             latitude: props.location.coords.latitude,
             longitude: props.location.coords.longitude,
@@ -36,7 +35,6 @@ const styles = {
         width: 40,
         height: 40,
         borderRadius: 50,
-        borderWidth: 1,
         borderColor: constants.colors.dark,
         justifyContent: 'center',
         alignItems: 'center',
