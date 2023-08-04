@@ -63,7 +63,7 @@ export function MapScreen(props) {
                         })}
                     </MapView>
                     <LocateMeButton mapView={this.mapView} location={props.location}/>
-                    <PlaceBottomSheet place={spot}/>
+                    <PlaceBottomSheet location={props.location} place={spot}/>
                 </View>
             </BottomSheetModalProvider>
         </GestureHandlerRootView>

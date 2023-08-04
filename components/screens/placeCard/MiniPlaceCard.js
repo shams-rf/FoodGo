@@ -1,10 +1,30 @@
-import React from 'react';
+import React, {useState} from 'react';
 import {Platform, Text, View} from "react-native";
 import {Chip} from "react-native-paper";
 import {Rating} from "react-native-ratings";
 import {DirectionsButton} from "./DirectionsButton";
+import axios from "axios";
+import {googleMapsConfig} from "../../../config/GoogleMapsConfig";
 
 export function MiniPlaceCard(props) {
+    const [distance, setDistance] = useState(null)
+
+    function getDistance() {
+        axios.get('https://maps.googleapis.com/maps/api/distancematrix/json?', {
+            params: {
+                destinations: `${props.place.geometry.location.lat},${props.place.geometry.location.lng}`,
+                origins: `${props.location.coords.latitude},${props.location.coords.longitude}`,
+                key: googleMapsConfig.API_KEY
+            }
+        })
+            .then((response) => {
+                setDistance(response.data.rows[0].elements[0].distance.text)
+            })
+            .catch((error) => {
+                console.log(error)
+            })
+    }
+
     if(props.place === null) {
         return (
             <View>
@@ -12,6 +32,7 @@ export function MiniPlaceCard(props) {
             </View>
         )
     } else {
+        getDistance()
         return (
             <View style={styles.container}>
                 <View style={styles.headingBox}>
@@ -32,6 +53,7 @@ export function MiniPlaceCard(props) {
                         startingValue={props.place.rating}
                         ratingColor='#ffd700'
                     />
+                    <Text style={styles.distance}>{distance}</Text>
                 </View>
                 <DirectionsButton place={props.place}/>
             </View>
@@ -43,8 +65,7 @@ const styles = {
     container: {
         paddingLeft: 20,
         paddingRight: 20,
-        alignItems: 'flex-start',
-        gap: 10
+        gap: 10,
     },
     title: {
         fontSize: 18,
@@ -72,11 +93,17 @@ const styles = {
     ratingBox: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 5
+        gap: 5,
+        justifyContent: 'space-between'
     },
     ratingText: {
         fontSize: 14,
         fontWeight: 'bold',
         fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
     },
+    distance: {
+        fontSize: 14,
+        fontWeight: 'bold',
+        fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
+    }
 }

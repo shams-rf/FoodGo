@@ -15,7 +15,7 @@ export function DirectionsButton(props) {
 
     return (
         <TouchableOpacity style={styles.routeButton} onPress={goToMaps}>
-            <FontAwesome5 color={'#fff'} size={50} name={'route'}/>
+            <FontAwesome5 color={'#fff'} size={30} name={'route'}/>
         </TouchableOpacity>
     );
 }
@@ -25,5 +25,9 @@ const styles = {
         borderRadius: 50,
         backgroundColor: constants.colors.light2,
         padding: 20,
+        width: 70,
+        height: 70,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 }
