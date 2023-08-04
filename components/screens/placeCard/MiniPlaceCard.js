@@ -5,7 +5,6 @@ import {Rating} from "react-native-ratings";
 import {DirectionsButton} from "./DirectionsButton";
 
 export function MiniPlaceCard(props) {
-    console.log(props.place)
     if(props.place === null) {
         return (
             <View>

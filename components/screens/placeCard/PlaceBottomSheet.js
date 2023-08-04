@@ -1,16 +1,20 @@
-import React, {useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import {View} from "react-native";
 import {BottomSheetModal} from "@gorhom/bottom-sheet";
 import {MiniPlaceCard} from "./MiniPlaceCard";
 
 export function PlaceBottomSheet(props) {
     const bottomSheetRef = useRef(null)
-    const snapPoints = ['25%', '75%']
-    function openBottomSheet() {
-        bottomSheetRef.current?.present()
-    }
+    const snapPoints = ['10%', '40%', '95%']
 
-    openBottomSheet()
+    useEffect(() => {
+        if(props.place === null) {
+            bottomSheetRef.current?.present()
+        } else {
+            bottomSheetRef.current?.snapToIndex(1)
+        }
+    }, [props.place])
+
     return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <BottomSheetModal

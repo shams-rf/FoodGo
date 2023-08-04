@@ -12,6 +12,7 @@ import {GestureHandlerRootView} from "react-native-gesture-handler";
 export function MapScreen(props) {
     const [data, setData] = useState([])
     const [spot, setSpot] = useState(null)
+    const [marker, setMarker] = useState(null)
 
     useEffect(() => {
         axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json', {
@@ -48,9 +49,12 @@ export function MapScreen(props) {
                             longitudeDelta: 0.05
                         }}
                     >
-                        {data.map((place) => {
+                        {data.map((place, index) => {
                             return (
                                 <CustomMarker
+                                    index={index}
+                                    setMarker={setMarker}
+                                    marker={marker}
                                     setSpot={setSpot}
                                     key={place.place_id}
                                     place={place}
