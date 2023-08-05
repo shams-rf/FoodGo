@@ -1,10 +1,10 @@
 import React, {useState} from 'react';
 import {Platform, Text, View} from "react-native";
 import {Chip} from "react-native-paper";
-import {Rating} from "react-native-ratings";
-import {DirectionsButton} from "./DirectionsButton";
+import {ActionButtons} from "./ActionButtons";
 import axios from "axios";
 import {googleMapsConfig} from "../../../config/GoogleMapsConfig";
+import {PlaceRating} from "./PlaceRating";
 
 export function MiniPlaceCard(props) {
     const [distance, setDistance] = useState(null)
@@ -35,27 +35,18 @@ export function MiniPlaceCard(props) {
         getDistance()
         return (
             <View style={styles.container}>
-                <View style={styles.headingBox}>
-                    <Text style={styles.title}>{props.place.name}</Text>
+                <Text style={styles.title}>{props.place.name}</Text>
+                <View style={styles.quickInfoBox}>
                     <Chip
                         textStyle={styles.chipText}
                         style={props.place.opening_hours.open_now ? styles.greenChip : styles.redChip}
                     >
                         {props.place.opening_hours.open_now ? 'Open' : 'Closed'}
                     </Chip>
-                </View>
-                <View style={styles.ratingBox}>
-                    <Text style={styles.ratingText}>{props.place.rating}</Text>
-                    <Rating
-                        type={'custom'}
-                        imageSize={15}
-                        readonly
-                        startingValue={props.place.rating}
-                        ratingColor='#ffd700'
-                    />
                     <Text style={styles.distance}>{distance}</Text>
+                    <PlaceRating place={props.place}/>
                 </View>
-                <DirectionsButton place={props.place}/>
+                <ActionButtons place={props.place}/>
             </View>
         )
     }
@@ -65,17 +56,13 @@ const styles = {
     container: {
         paddingLeft: 20,
         paddingRight: 20,
-        gap: 10,
+        gap: 15,
     },
     title: {
-        fontSize: 18,
+        fontSize: 20,
         fontWeight: 'bold',
         fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
         width: '80%'
-    },
-    headingBox: {
-        flexDirection: 'row',
-        alignItems: 'center',
     },
     greenChip: {
         backgroundColor: '#77dd77',
@@ -90,16 +77,10 @@ const styles = {
         fontSize: 14,
         fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
     },
-    ratingBox: {
+    quickInfoBox: {
         flexDirection: 'row',
         alignItems: 'center',
-        gap: 5,
         justifyContent: 'space-between'
-    },
-    ratingText: {
-        fontSize: 14,
-        fontWeight: 'bold',
-        fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
     },
     distance: {
         fontSize: 14,
