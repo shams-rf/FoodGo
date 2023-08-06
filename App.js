@@ -1,40 +1,51 @@
+import {Home} from "./Home";
 import {useEffect, useState} from "react";
-import * as Location from 'expo-location';
-import {LocationDenied} from "./components/screens/locationDeniedScreen/LocationDenied";
-import {MapScreen} from "./components/screens/mapScreen/MapScreen";
-import {SplashScreen} from "./components/screens/splashScreen/SplashScreen";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {OnboardingScreen} from "./components/screens/onboardingScreens/OnboardingScreen";
+import {Text, View} from "react-native";
+import {NavigationContainer} from "@react-navigation/native";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
 
 export default function App() {
-  const [location, setLocation] = useState(null)
-  const [error, setError] = useState(null)
+  const [firstLaunch, setFirstLaunch] = useState(null);
 
   useEffect(() => {
-    (async () => {
-      let {status} = await Location.requestForegroundPermissionsAsync();
-      if(status !== 'granted') {
-        setError(true)
-        return;
-      }
+    async function setData() {
+      const appData = await AsyncStorage.getItem("appLaunched");
 
-      let location = await Location.getCurrentPositionAsync({});
-      setLocation(location)
-    })();
+      if (appData == null) {
+        setFirstLaunch(true);
+        await AsyncStorage.setItem("appLaunched", "false");
+      } else {
+        setFirstLaunch(false);
+      }
+    }
+    setData()
+        .then()
+        .catch((error) => console.log(error))
   }, [])
 
-  if(error) {
-    return (
-        <LocationDenied/>
-    )
-  } else if(location) {
-    return (
-        // <MapScreen location={location}/>
-        <OnboardingScreen/>
-    )
-  } else {
-    return (
-        // <SplashScreen/>
-        <OnboardingScreen/>
-    )
+  const Stack = createNativeStackNavigator()
+
+  if(firstLaunch !== null) {
+    if(firstLaunch) {
+      return (
+          <NavigationContainer>
+            <Stack.Navigator screenOptions={{headerShown: false}}>
+              <Stack.Screen name={'Onboarding'} component={OnboardingScreen}/>
+              <Stack.Screen name={'Home'} component={Home}/>
+            </Stack.Navigator>
+          </NavigationContainer>
+      )
+    } else {
+      return (
+          <Home/>
+      )
+    }
   }
+  return (
+      <View>
+        <Text>Error</Text>
+      </View>
+  )
 }

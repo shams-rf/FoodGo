@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {Platform, Text, View} from "react-native";
-import {Chip} from "react-native-paper";
 import {ActionButtons} from "./ActionButtons";
 import axios from "axios";
 import {googleMapsConfig} from "../../../config/GoogleMapsConfig";
@@ -37,12 +36,9 @@ export function MiniPlaceCard(props) {
             <View style={styles.container}>
                 <Text style={styles.title}>{props.place.name}</Text>
                 <View style={styles.quickInfoBox}>
-                    <Chip
-                        textStyle={styles.chipText}
-                        style={props.place.opening_hours.open_now ? styles.greenChip : styles.redChip}
-                    >
+                    <Text style={props.place.opening_hours.open_now ? styles.open : styles.closed}>
                         {props.place.opening_hours.open_now ? 'Open' : 'Closed'}
-                    </Chip>
+                    </Text>
                     <Text style={styles.distance}>{distance}</Text>
                     <PlaceRating place={props.place}/>
                 </View>
@@ -62,15 +58,16 @@ const styles = {
         fontSize: 20,
         fontWeight: 'bold',
         fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
-        width: '80%'
     },
-    greenChip: {
-        backgroundColor: '#77dd77',
-        borderRadius: 50
+    open: {
+        fontSize: 14,
+        fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
+        color: '#76b947',
     },
-    redChip: {
-        backgroundColor: '#ff6961',
-        borderRadius: 50
+    closed: {
+        fontSize: 14,
+        fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
+        color: '#ff6961',
     },
     chipText: {
         color: 'white',
