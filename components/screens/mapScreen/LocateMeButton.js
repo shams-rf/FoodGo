@@ -17,7 +17,7 @@ export function LocateMeButton(props) {
     return (
         <SafeAreaView style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={focusLocation}>
-                <FontAwesome5 name={'location-arrow'} color={constants.colors.dark}/>
+                <FontAwesome5 name={'location-arrow'} color={constants.colors.limeGreen}/>
             </TouchableOpacity>
         </SafeAreaView>
     );

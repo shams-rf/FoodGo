@@ -1,7 +1,7 @@
 import React, {useEffect, useRef} from 'react';
 import {View} from "react-native";
 import {BottomSheetModal} from "@gorhom/bottom-sheet";
-import {MiniPlaceCard} from "./MiniPlaceCard";
+import {PlaceCard} from "./PlaceCard";
 
 export function PlaceBottomSheet(props) {
     const bottomSheetRef = useRef(null)
@@ -24,7 +24,7 @@ export function PlaceBottomSheet(props) {
                 index={0}
                 backgroundStyle={{borderRadius: 50, backgroundColor: '#fff'}}
             >
-                <MiniPlaceCard location={props.location} place={props.place}/>
+                <PlaceCard location={props.location} place={props.place}/>
             </BottomSheetModal>
         </View>
     );

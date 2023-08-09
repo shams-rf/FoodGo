@@ -20,7 +20,7 @@ export function OnboardingScreen({navigation}) {
                     backgroundColor: '#faa0a0',
                     image: <Image style={styles.image} source={chipsImg} />,
                     title: 'Welcome to HalalGo',
-                    subtitle: 'Find Islamic centers and Halal restaurants near you',
+                    subtitle: 'Find Halal restaurants near you',
                 },
                 {
                     backgroundColor: '#b1d8b7',

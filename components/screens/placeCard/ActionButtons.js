@@ -43,7 +43,7 @@ export function ActionButtons(props) {
 const styles = {
     routeButton: {
         borderRadius: 50,
-        backgroundColor: constants.colors.dark,
+        backgroundColor: constants.colors.limeGreen,
         width: 60,
         height: 60,
         alignItems: 'center',

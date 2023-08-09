@@ -4,8 +4,9 @@ import {ActionButtons} from "./ActionButtons";
 import axios from "axios";
 import {googleMapsConfig} from "../../../config/GoogleMapsConfig";
 import {PlaceRating} from "./PlaceRating";
+import {constants} from "../../../config/Constants";
 
-export function MiniPlaceCard(props) {
+export function PlaceCard(props) {
     const [distance, setDistance] = useState(null)
 
     function getDistance() {
@@ -62,7 +63,7 @@ const styles = {
     open: {
         fontSize: 14,
         fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
-        color: '#76b947',
+        color: constants.colors.leafGreen,
     },
     closed: {
         fontSize: 14,
