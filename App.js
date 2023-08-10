@@ -1,20 +1,51 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import {Home} from "./Home";
+import {useEffect, useState} from "react";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import {OnboardingScreen} from "./components/screens/onboardingScreens/OnboardingScreen";
+import {Text, View} from "react-native";
+import {NavigationContainer} from "@react-navigation/native";
+import {createNativeStackNavigator} from "@react-navigation/native-stack";
 
 export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
-}
+  const [firstLaunch, setFirstLaunch] = useState(null);
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+  useEffect(() => {
+    async function setData() {
+      const appData = await AsyncStorage.getItem("appLaunched");
+
+      if (appData == null) {
+        setFirstLaunch(true);
+        await AsyncStorage.setItem("appLaunched", "false");
+      } else {
+        setFirstLaunch(false);
+      }
+    }
+    setData()
+        .then()
+        .catch((error) => console.log(error))
+  }, [])
+
+  const Stack = createNativeStackNavigator()
+
+  if(firstLaunch !== null) {
+    if(firstLaunch) {
+      return (
+          <NavigationContainer>
+            <Stack.Navigator screenOptions={{headerShown: false}}>
+              <Stack.Screen name={'Onboarding'} component={OnboardingScreen}/>
+              <Stack.Screen name={'Home'} component={Home}/>
+            </Stack.Navigator>
+          </NavigationContainer>
+      )
+    } else {
+      return (
+          <Home/>
+      )
+    }
+  }
+  return (
+      <View>
+        <Text>Error</Text>
+      </View>
+  )
+}
