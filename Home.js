@@ -23,7 +23,7 @@ export function Home() {
                 return;
             }
 
-            let location = await Location.getCurrentPositionAsync({});
+            let location = await Location.getLastKnownPositionAsync({});
             setLocation(location)
         })();
     }, [])
@@ -41,7 +41,6 @@ export function Home() {
                     {
                         headerShown: false,
                         tabBarLabelStyle: styles.tabBarText,
-                        tabBarStyle: styles.tabBar,
                         tabBarActiveTintColor: constants.colors.limeGreen
                     }
                 }>
@@ -69,9 +68,5 @@ const styles = {
     tabBarText: {
         fontSize: 12,
         fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
-    },
-    tabBar: {
-        backgroundColor: constants.colors.dark,
-        marginBottom: (Platform.OS === 'ios') ? 0 : 20
-    },
+    }
 }
