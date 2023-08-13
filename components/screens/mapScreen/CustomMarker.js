@@ -8,8 +8,8 @@ export function CustomMarker(props) {
         props.setMarker(props.index)
         props.setSpot(props.place)
         let r = {
-            latitude: props.place.geometry.location.lat,
-            longitude: props.place.geometry.location.lng,
+            latitude: props.place.location.latitude,
+            longitude: props.place.location.longitude,
             latitudeDelta: 0.02,
             longitudeDelta: 0.02,
         };
@@ -20,8 +20,8 @@ export function CustomMarker(props) {
         <Marker
             image={props.marker === props.index ? markerImg : dishImg}
             onPress={focusMarker}
-            key={props.place.place_id}
-            coordinate={{ latitude: props.place.geometry.location.lat, longitude: props.place.geometry.location.lng }}
+            key={props.place.id}
+            coordinate={{ latitude: props.place.location.latitude, longitude: props.place.location.longitude }}
         />
     );
 }

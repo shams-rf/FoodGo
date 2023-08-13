@@ -12,7 +12,7 @@ export function PlaceCard(props) {
     function getDistance() {
         axios.get('https://maps.googleapis.com/maps/api/distancematrix/json?', {
             params: {
-                destinations: `${props.place.geometry.location.lat},${props.place.geometry.location.lng}`,
+                destinations: `${props.place.location.latitude},${props.place.location.longitude}`,
                 origins: `${props.location.coords.latitude},${props.location.coords.longitude}`,
                 key: constants.googleMapsConfig.API_KEY
             }
@@ -36,13 +36,13 @@ export function PlaceCard(props) {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>{props.place.name}</Text>
-                <View style={styles.quickInfoBox}>
-                    <Text style={props.place.opening_hours.open_now ? styles.open : styles.closed}>
-                        {props.place.opening_hours.open_now ? 'Open' : 'Closed'}
-                    </Text>
-                    <Text style={styles.distance}>{distance}</Text>
-                    <PlaceRating place={props.place}/>
-                </View>
+                {/*<View style={styles.quickInfoBox}>*/}
+                {/*    <Text style={props.place.opening_hours.open_now ? styles.open : styles.closed}>*/}
+                {/*        {props.place.opening_hours.open_now ? 'Open' : 'Closed'}*/}
+                {/*    </Text>*/}
+                {/*    <Text style={styles.distance}>{distance}</Text>*/}
+                {/*    <PlaceRating place={props.place}/>*/}
+                {/*</View>*/}
                 <ActionButtons place={props.place}/>
             </View>
         )

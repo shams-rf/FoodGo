@@ -53,6 +53,7 @@ export function Login() {
                 autoCapitalize={'none'}
                 secureTextEntry
                 style={styles.textInput}
+                returnKeyType={'done'}
                 onChangeText={(text) => setPassword(text)}/>
             {loading ? <ActivityIndicator size={'large'} color={'#000'} />
             : <>
