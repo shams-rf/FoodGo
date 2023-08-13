@@ -1,10 +1,14 @@
 export const constants = {
-    colors: {
-        green: '#2C5E1A',
-        forestGreen: '#1A4314',
-        limeGreen: '#32CD30',
-        leafGreen: '#59981A',
-        seaFoamGreen: '#B2D2A4',
-        spearmint: '#B2D2A4',
+    googleMapsConfig: {
+        API_KEY: 'AIzaSyCPJEjAGu53qkEZvuM3Vh7DvcaS0MUviDE'
+    },
+    firebaseConfig: {
+        API_KEY: 'AIzaSyC_2yBtgOxanWLLinpFsh2YcTceVDYXCYs',
+        AUTH_DOMAIN: 'muslimgo-2599b.firebaseapp.com',
+        PROJECT_ID: 'muslimgo-2599b',
+        STORAGE_BUCKET: 'muslimgo-2599b.appspot.com',
+        MESSAGING_SENDER_ID: '1023670318729',
+        APP_ID: '1:1023670318729:web:129cf994039732aa5a3858',
+        MEASUREMENT_ID: 'G-LR4M9KD1MD'
     }
 }

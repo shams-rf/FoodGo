@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, Platform, View} from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
-import {constants} from "../../../config/Constants";
+import {colours} from "../../../config/Colours";
 import {LocationPermissions} from "./LocationPermissions";
 const chipsImg = require('../../../assets/icons/chips.gif')
 const mosqueImg = require('../../../assets/icons/mosque.gif')
@@ -29,7 +29,7 @@ export function OnboardingScreen({navigation}) {
                     subtitle: <LocationPermissions/>,
                 },
                 {
-                    backgroundColor: constants.colors.light,
+                    backgroundColor: colours.green,
                     image: <Image style={styles.image} source={likeImg} />,
                     title: 'Done',
                     subtitle: 'Thank you for choosing FoodGo',

@@ -2,9 +2,9 @@ import React, {useState} from 'react';
 import {Platform, Text, View} from "react-native";
 import {ActionButtons} from "./ActionButtons";
 import axios from "axios";
-import {googleMapsConfig} from "../../../config/GoogleMapsConfig";
-import {PlaceRating} from "./PlaceRating";
 import {constants} from "../../../config/Constants";
+import {PlaceRating} from "./PlaceRating";
+import {colours} from "../../../config/Colours";
 
 export function PlaceCard(props) {
     const [distance, setDistance] = useState(null)
@@ -14,7 +14,7 @@ export function PlaceCard(props) {
             params: {
                 destinations: `${props.place.geometry.location.lat},${props.place.geometry.location.lng}`,
                 origins: `${props.location.coords.latitude},${props.location.coords.longitude}`,
-                key: googleMapsConfig.API_KEY
+                key: constants.googleMapsConfig.API_KEY
             }
         })
             .then((response) => {
@@ -63,7 +63,7 @@ const styles = {
     open: {
         fontSize: 14,
         fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
-        color: constants.colors.leafGreen,
+        color: colours.leafGreen,
     },
     closed: {
         fontSize: 14,

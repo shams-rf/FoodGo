@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from "react-native";
-import {googleMapsConfig} from "../../../config/GoogleMapsConfig";
+import {constants} from "../../../config/Constants";
 import MapView from "react-native-maps";
 import axios from "axios";
 import {CustomMarker} from "./CustomMarker";
@@ -19,7 +19,7 @@ export function MapScreen(props) {
             params: {
                 query: 'halal',
                 location: `${props.location.coords.latitude}, ${props.location.coords.longitude}`,
-                key: googleMapsConfig.API_KEY,
+                key: constants.googleMapsConfig.API_KEY,
             }
         })
             .then((response) => {

@@ -2,7 +2,7 @@ import React from 'react';
 import openMaps from "react-native-open-maps";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
 import {Linking, Platform, TouchableOpacity, View} from "react-native";
-import {constants} from "../../../config/Constants";
+import {colours} from "../../../config/Colours";
 import call from 'react-native-phone-call';
 
 export function ActionButtons(props) {
@@ -43,7 +43,7 @@ export function ActionButtons(props) {
 const styles = {
     routeButton: {
         borderRadius: 50,
-        backgroundColor: constants.colors.limeGreen,
+        backgroundColor: colours.limeGreen,
         width: 60,
         height: 60,
         alignItems: 'center',
