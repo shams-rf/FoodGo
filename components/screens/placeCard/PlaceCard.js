@@ -36,13 +36,10 @@ export function PlaceCard(props) {
         return (
             <View style={styles.container}>
                 <Text style={styles.title}>{props.place.name}</Text>
-                {/*<View style={styles.quickInfoBox}>*/}
-                {/*    <Text style={props.place.opening_hours.open_now ? styles.open : styles.closed}>*/}
-                {/*        {props.place.opening_hours.open_now ? 'Open' : 'Closed'}*/}
-                {/*    </Text>*/}
-                {/*    <Text style={styles.distance}>{distance}</Text>*/}
-                {/*    <PlaceRating place={props.place}/>*/}
-                {/*</View>*/}
+                <View style={styles.quickInfoBox}>
+                    <Text style={styles.distance}>{distance}</Text>
+                    <PlaceRating place={props.place}/>
+                </View>
                 <ActionButtons place={props.place}/>
             </View>
         )

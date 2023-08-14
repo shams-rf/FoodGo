@@ -28,6 +28,12 @@ export function ActionButtons(props) {
         }
     }
 
+    function goToWebsite() {
+        Linking.openURL(props.place.website)
+            .then()
+            .catch((error) => console.log(error))
+    }
+
     return (
         <View style={styles.buttons}>
             <TouchableOpacity style={styles.routeButton} onPress={goToMaps}>
@@ -36,6 +42,15 @@ export function ActionButtons(props) {
             <TouchableOpacity style={styles.routeButton} onPress={goToPhone}>
                 <FontAwesome5 color={'#fff'} size={30} name={'phone'}/>
             </TouchableOpacity>
+            {
+                props.place.website ? (
+                    <TouchableOpacity style={styles.routeButton} onPress={goToWebsite}>
+                        <FontAwesome5 color={'#fff'} size={30} name={'globe'}/>
+                    </TouchableOpacity>
+                ) : (
+                    <></>
+                )
+            }
         </View>
     );
 }

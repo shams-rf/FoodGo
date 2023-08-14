@@ -63,7 +63,7 @@ export function MapScreen(props) {
                                     setMarker={setMarker}
                                     marker={marker}
                                     setSpot={setSpot}
-                                    key={place.place_id}
+                                    key={place.id}
                                     place={place}
                                     mapView={this.mapView}/>
                             )

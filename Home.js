@@ -25,6 +25,9 @@ export function Home() {
 
             let location = await Location.getLastKnownPositionAsync({});
             setLocation(location)
+
+            location = await Location.getCurrentPositionAsync({});
+            setLocation(location)
         })();
     }, [])
 
