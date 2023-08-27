@@ -8,8 +8,7 @@ import call from 'react-native-phone-call';
 export function ActionButtons(props) {
     function goToMaps() {
         openMaps({
-            end: `${props.place.geometry.location.lat},${props.place.geometry.location.lng}`,
-            provider: 'google',
+            end: `${props.place.location.latitude},${props.place.location.longitude}`,
             travelType: 'drive'
         })
     }
