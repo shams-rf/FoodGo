@@ -1,38 +1,33 @@
 import React from 'react';
 import {Image, Platform, View} from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
-import {colours} from "../../../config/Colours";
-import {LocationPermissions} from "./LocationPermissions";
+import {DoneButton} from "./DoneButton";
 const chipsImg = require('../../../assets/icons/chips.gif')
-const mosqueImg = require('../../../assets/icons/mosque.gif')
 const likeImg = require('../../../assets/icons/done.gif')
 
 export function OnboardingScreen({navigation}) {
     return (
         <View style={styles.container}>
             <Onboarding
+                DoneButtonComponent={DoneButton}
                 onDone={() => navigation.replace('Home')}
                 showSkip={false}
                 titleStyles={styles.title}
                 subTitleStyles={styles.subtitle}
+                bottomBarHighlight={false}
+                showNext={false}
                 pages={[
                 {
-                    backgroundColor: '#faa0a0',
+                    backgroundColor: '#ff5c5c',
                     image: <Image style={styles.image} source={chipsImg} />,
-                    title: 'Welcome to HalalGo',
-                    subtitle: 'Find Halal restaurants near you',
+                    title: 'Welcome to Halalicious',
+                    subtitle: 'All your favourite food in one place',
                 },
                 {
-                    backgroundColor: '#b1d8b7',
-                    image: <Image style={styles.image} source={mosqueImg} />,
-                    title: 'Location',
-                    subtitle: <LocationPermissions/>,
-                },
-                {
-                    backgroundColor: colours.green,
+                    backgroundColor: '#a30000',
                     image: <Image style={styles.image} source={likeImg} />,
-                    title: 'Done',
-                    subtitle: 'Thank you for choosing FoodGo',
+                    title: 'Ready to go',
+                    subtitle: 'Enable location access to show places near you',
                 }
             ]}/>
         </View>
