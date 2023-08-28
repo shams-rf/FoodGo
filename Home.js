@@ -5,10 +5,10 @@ import {MapScreen} from "./components/screens/mapScreen/MapScreen";
 import {SplashScreen} from "./components/screens/splashScreen/SplashScreen";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {NavigationContainer} from "@react-navigation/native";
-import {SettingsScreen} from "./components/screens/SettingsScreen";
+import {Main} from "./components/screens/Main";
 import {Platform} from "react-native";
 import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {constants} from "./config/Constants";
+import {colours} from "./config/Colours";
 import FontAwesome from "react-native-vector-icons/FontAwesome";
 
 export function Home() {
@@ -24,6 +24,9 @@ export function Home() {
             }
 
             let location = await Location.getLastKnownPositionAsync({});
+            setLocation(location)
+
+            location = await Location.getCurrentPositionAsync({});
             setLocation(location)
         })();
     }, [])
@@ -41,19 +44,19 @@ export function Home() {
                     {
                         headerShown: false,
                         tabBarLabelStyle: styles.tabBarText,
-                        tabBarActiveTintColor: constants.colors.limeGreen
+                        tabBarActiveTintColor: colours.limeGreen
                     }
                 }>
                     <Tab.Screen options={{
                         tabBarIcon: ({focused}) => (
-                            <FontAwesome5 name={'map'} color={focused ? constants.colors.limeGreen : 'gray'}/>
+                            <FontAwesome5 name={'map'} color={focused ? colours.limeGreen : 'gray'}/>
                         )
                     }} name={'MapScreen'} children={() => <MapScreen location={location}/>}/>
                     <Tab.Screen options={{
                         tabBarIcon: ({focused}) => (
-                            <FontAwesome name={'gears'} color={focused ? constants.colors.limeGreen : 'gray'}/>
+                            <FontAwesome name={'gears'} color={focused ? colours.limeGreen : 'gray'}/>
                         )
-                    }} name={'Settings'} children={() => <SettingsScreen/>}/>
+                    }} name={'Settings'} children={() => <Main/>}/>
                 </Tab.Navigator>
             </NavigationContainer>
         )

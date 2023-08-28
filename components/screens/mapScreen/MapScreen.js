@@ -1,34 +1,41 @@
 import React, {useEffect, useState} from 'react';
 import {StyleSheet, View} from "react-native";
-import {googleMapsConfig} from "../../../config/GoogleMapsConfig";
 import MapView from "react-native-maps";
-import axios from "axios";
 import {CustomMarker} from "./CustomMarker";
 import {LocateMeButton} from "./LocateMeButton";
 import {PlaceBottomSheet} from "../placeCard/PlaceBottomSheet";
 import {BottomSheetModalProvider} from "@gorhom/bottom-sheet";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
+import {collection, getDocs, query, where, orderBy, limit} from "firebase/firestore";
+import {FIREBASE_DB} from "../../../config/Firebase";
+import { GeoPoint } from 'firebase/firestore';
 
 export function MapScreen(props) {
     const [data, setData] = useState([])
     const [spot, setSpot] = useState(null)
     const [marker, setMarker] = useState(null)
 
-    useEffect(() => {
-        axios.get('https://maps.googleapis.com/maps/api/place/textsearch/json', {
-            params: {
-                query: 'halal',
-                location: `${props.location.coords.latitude}, ${props.location.coords.longitude}`,
-                key: googleMapsConfig.API_KEY,
-            }
-        })
-            .then((response) => {
-                setData(response.data.results)
+    const userLocation = new GeoPoint(props.location.coords.latitude, props.location.coords.longitude)
+
+    useEffect( () => {
+        (async () => {
+            const fetchedDocs = []
+            const restaurantsRef = collection(FIREBASE_DB, 'restaurants')
+            const q = query(
+                restaurantsRef,
+                where('location', '>', userLocation),
+                orderBy('location'),
+                limit(10))
+
+            const querySnapshot = await getDocs(q)
+
+            querySnapshot.forEach((doc) => {
+                fetchedDocs.push({id: doc.id, ...doc.data()})
             })
-            .catch((error) => {
-                console.log(error)
-            })
-    }, [])
+
+            setData(fetchedDocs)
+        })();
+    })
 
     return (
         <GestureHandlerRootView style={{flex: 1}}>
@@ -56,7 +63,7 @@ export function MapScreen(props) {
                                     setMarker={setMarker}
                                     marker={marker}
                                     setSpot={setSpot}
-                                    key={place.place_id}
+                                    key={place.id}
                                     place={place}
                                     mapView={this.mapView}/>
                             )
