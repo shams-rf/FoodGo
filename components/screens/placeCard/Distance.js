@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Platform, Text, View} from "react-native";
+import {Text, View} from "react-native";
 import axios from "axios";
 import {constants} from "../../../config/Constants";
 
@@ -38,12 +38,12 @@ export function Distance(props) {
 const styles = {
     distanceTitle: {
         fontSize: 14,
-        fontWeight: 'bold',
-        fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
+        fontWeight: 500,
+        fontFamily: 'Rubik-Medium',
     },
     distanceText: {
         fontSize: 16,
-        fontWeight: 'bold',
-        fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
+        fontWeight: 500,
+        fontFamily: 'Rubik-Medium',
     }
 }

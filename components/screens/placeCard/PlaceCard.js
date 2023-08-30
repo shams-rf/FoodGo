@@ -1,8 +1,7 @@
 import React from 'react';
-import {Platform, Text, View} from "react-native";
+import {Text, View} from "react-native";
 import {ActionButtons} from "./ActionButtons";
 import {PlaceRating} from "./PlaceRating";
-import {colours} from "../../../config/Colours";
 import {Distance} from "./Distance";
 import {ImageSlider} from "./ImageSlider";
 
@@ -35,24 +34,9 @@ const styles = {
         gap: 15,
     },
     title: {
-        fontSize: 20,
-        fontWeight: 'bold',
-        fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
-    },
-    open: {
-        fontSize: 14,
-        fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
-        color: colours.leafGreen,
-    },
-    closed: {
-        fontSize: 14,
-        fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
-        color: '#ff6961',
-    },
-    chipText: {
-        color: 'white',
-        fontSize: 14,
-        fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
+        fontSize: 22,
+        fontWeight: 500,
+        fontFamily: 'Rubik-Medium'
     },
     quickInfoBox: {
         flexDirection: 'row',
