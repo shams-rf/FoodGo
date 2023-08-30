@@ -15,7 +15,7 @@ export function ActionButtons(props) {
 
     function goToPhone() {
         const args = {
-            number: '0899543487',
+            number: props.place.phone,
             prompt: true
         }
         if(Platform.OS === 'ios') {
