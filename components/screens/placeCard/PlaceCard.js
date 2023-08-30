@@ -4,6 +4,7 @@ import {ActionButtons} from "./ActionButtons";
 import {PlaceRating} from "./PlaceRating";
 import {colours} from "../../../config/Colours";
 import {Distance} from "./Distance";
+import {ImageSlider} from "./ImageSlider";
 
 export function PlaceCard(props) {
     if(props.place === null) {
@@ -21,6 +22,7 @@ export function PlaceCard(props) {
                     <PlaceRating place={props.place}/>
                 </View>
                 <ActionButtons place={props.place}/>
+                <ImageSlider place={props.place}/>
             </View>
         )
     }
