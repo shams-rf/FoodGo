@@ -1,7 +1,7 @@
 import React from 'react';
 import {Marker} from "react-native-maps";
-const markerImg = require('../../../assets/icons/marker.png')
-const dishImg = require('../../../assets/icons/dish.png')
+const markerImg = require('../../../assets/mapscreen/marker.png')
+const dishImg = require('../../../assets/mapscreen/dish.png')
 
 export function CustomMarker(props) {
     function focusMarker() {

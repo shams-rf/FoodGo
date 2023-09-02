@@ -1,7 +1,6 @@
 import React from 'react';
-import {Platform, SafeAreaView, TouchableOpacity} from "react-native";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {colours} from '../../../config/Colours';
+import {Image, Platform, SafeAreaView, TouchableOpacity} from "react-native";
+const locateMe = require('../../../assets/mapscreen/locateMe.png')
 
 export function LocateMeButton(props) {
     function focusLocation() {
@@ -17,7 +16,7 @@ export function LocateMeButton(props) {
     return (
         <SafeAreaView style={styles.container}>
             <TouchableOpacity style={styles.button} onPress={focusLocation}>
-                <FontAwesome5 name={'location-arrow'} color={colours.limeGreen}/>
+                <Image style={styles.arrow} source={locateMe}/>
             </TouchableOpacity>
         </SafeAreaView>
     );
@@ -32,10 +31,14 @@ const styles = {
     },
     button: {
         backgroundColor: '#fff',
-        width: 40,
-        height: 40,
+        width: 50,
+        height: 50,
         borderRadius: 50,
         justifyContent: 'center',
         alignItems: 'center',
+    },
+    arrow: {
+        width: '50%',
+        height: '50%'
     }
 }

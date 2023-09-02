@@ -2,8 +2,8 @@ import React from 'react';
 import {Image, Platform, View} from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
 import {DoneButton} from "./DoneButton";
-const chipsImg = require('../../../assets/icons/chips.gif')
-const likeImg = require('../../../assets/icons/done.gif')
+const chipsImg = require('../../../assets/onboarding/chips.gif')
+const likeImg = require('../../../assets/onboarding/done.gif')
 
 export function OnboardingScreen({navigation}) {
     return (

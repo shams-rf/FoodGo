@@ -5,11 +5,23 @@ import {OnboardingScreen} from "./components/screens/onboardingScreens/Onboardin
 import {Text, View} from "react-native";
 import {NavigationContainer} from "@react-navigation/native";
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
+import {useFonts} from "expo-font";
+import * as SplashScreen from 'expo-splash-screen';
 
 export default function App() {
+  const [fontsLoaded] = useFonts({
+    'ComfortaaLight': require('./assets/fonts/Comfortaa-Light.ttf'),
+    'comfortaa_regular': require('./assets/fonts/Comfortaa-Regular.ttf'),
+    'ComfortaaMedium': require('./assets/fonts/Comfortaa-Medium.ttf'),
+    'ComfortaaBold': require('./assets/fonts/Comfortaa-Bold.ttf'),
+  })
+
   const [firstLaunch, setFirstLaunch] = useState(null);
 
   useEffect(() => {
+    async function prepare() {
+      await SplashScreen.preventAutoHideAsync()
+    }
     async function setData() {
       const appData = await AsyncStorage.getItem("appLaunched");
 
@@ -20,12 +32,19 @@ export default function App() {
         setFirstLaunch(false);
       }
     }
+    prepare().then().catch((error) => console.log(error))
     setData()
         .then()
         .catch((error) => console.log(error))
   }, [])
 
   const Stack = createNativeStackNavigator()
+
+  if(!fontsLoaded) {
+    return undefined
+  } else {
+    SplashScreen.hideAsync().then()
+  }
 
   if(firstLaunch !== null) {
     if(firstLaunch) {

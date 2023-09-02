@@ -6,10 +6,12 @@ import {SplashScreen} from "./components/screens/splashScreen/SplashScreen";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {NavigationContainer} from "@react-navigation/native";
 import {Main} from "./components/screens/Main";
-import {Platform} from "react-native";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
+import {Image, Platform} from "react-native";
 import {colours} from "./config/Colours";
-import FontAwesome from "react-native-vector-icons/FontAwesome";
+const mapIcon = require('./assets/tabs/map.png')
+const mapIconGray = require('./assets/tabs/mapGray.png')
+const heartIcon = require('./assets/tabs/heart.png')
+const heartIconGray = require('./assets/tabs/heartGray.png')
 
 export function Home() {
     const [location, setLocation] = useState(null)
@@ -39,23 +41,41 @@ export function Home() {
         )
     } else if(location) {
         return (
-            <NavigationContainer>
+            <NavigationContainer independent>
                 <Tab.Navigator screenOptions={
                     {
                         headerShown: false,
                         tabBarLabelStyle: styles.tabBarText,
-                        tabBarActiveTintColor: colours.limeGreen
+                        tabBarActiveTintColor: colours.limeGreen,
+                        tabBarInactiveTintColor: 'gray',
+                        tabBarShowLabel: false
                     }
                 }>
                     <Tab.Screen options={{
-                        tabBarIcon: ({focused}) => (
-                            <FontAwesome5 name={'map'} color={focused ? colours.limeGreen : 'gray'}/>
-                        )
+                        tabBarIcon: ({focused}) => {
+                            if(focused) {
+                                return (
+                                    <Image style={styles.icons} source={mapIcon}/>
+                                )
+                            } else {
+                                return (
+                                    <Image style={styles.icons} source={mapIconGray}/>
+                                )
+                            }
+                        }
                     }} name={'MapScreen'} children={() => <MapScreen location={location}/>}/>
                     <Tab.Screen options={{
-                        tabBarIcon: ({focused}) => (
-                            <FontAwesome name={'gears'} color={focused ? colours.limeGreen : 'gray'}/>
-                        )
+                        tabBarIcon: ({focused}) => {
+                            if(focused) {
+                                return (
+                                    <Image style={styles.icons} source={heartIcon}/>
+                                )
+                            } else {
+                                return (
+                                    <Image style={styles.icons} source={heartIconGray}/>
+                                )
+                            }
+                        }
                     }} name={'Settings'} children={() => <Main/>}/>
                 </Tab.Navigator>
             </NavigationContainer>
@@ -71,5 +91,9 @@ const styles = {
     tabBarText: {
         fontSize: 12,
         fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
+    },
+    icons: {
+        width: 30,
+        height: 30
     }
 }
