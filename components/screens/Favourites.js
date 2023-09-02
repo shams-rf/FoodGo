@@ -3,7 +3,7 @@ import {List} from "./List";
 import {Button, View} from "react-native";
 import {FIREBASE_AUTH} from "../../config/Firebase";
 
-export function User({navigation}) {
+export function Favourites({navigation}) {
     function goToList() {
         navigation.navigate('List')
     }

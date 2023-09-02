@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {Login} from "./Login";
-import {User} from "./User";
+import {Favourites} from "./Favourites";
 import {onAuthStateChanged} from 'firebase/auth'
 import {FIREBASE_AUTH} from "../../config/Firebase";
 import {List} from "./List";
@@ -22,7 +22,7 @@ export function Main() {
         <NavigationContainer independent>
             <Stack.Navigator>
                 {user ? (
-                    <Stack.Screen name={'User'} component={User}/>
+                    <Stack.Screen name={'Favourites'} component={Favourites}/>
                 ) : (
                     <Stack.Screen name={'Login'} component={Login}/>
                 )}

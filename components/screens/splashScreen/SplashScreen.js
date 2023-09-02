@@ -1,6 +1,6 @@
 import React from 'react';
 import {Image, Platform, Text, View} from "react-native";
-import location from '../../../assets/icons/location.gif';
+import location from '../../../assets/mapscreen/location.gif';
 
 export function SplashScreen() {
     return (

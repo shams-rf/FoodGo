@@ -10,9 +10,10 @@ import * as SplashScreen from 'expo-splash-screen';
 
 export default function App() {
   const [fontsLoaded] = useFonts({
-    'Rubik': require('./assets/fonts/Rubik.ttf'),
-    'Rubik-Regular': require('./assets/fonts/Rubik-Regular.ttf'),
-    'Rubik-Medium': require('./assets/fonts/Rubik-Medium.ttf'),
+    'ComfortaaLight': require('./assets/fonts/Comfortaa-Light.ttf'),
+    'comfortaa_regular': require('./assets/fonts/Comfortaa-Regular.ttf'),
+    'ComfortaaMedium': require('./assets/fonts/Comfortaa-Medium.ttf'),
+    'ComfortaaBold': require('./assets/fonts/Comfortaa-Bold.ttf'),
   })
 
   const [firstLaunch, setFirstLaunch] = useState(null);

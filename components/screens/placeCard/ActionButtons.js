@@ -1,9 +1,11 @@
 import React from 'react';
 import openMaps from "react-native-open-maps";
-import FontAwesome5 from "react-native-vector-icons/FontAwesome5";
-import {Linking, Platform, TouchableOpacity, View} from "react-native";
+import {Image, Linking, Platform, TouchableOpacity, View} from "react-native";
 import {colours} from "../../../config/Colours";
 import call from 'react-native-phone-call';
+const directionsIcon = require('../../../assets/placeCard/directions.png')
+const phone = require('../../../assets/placeCard/phone.png')
+const website = require('../../../assets/placeCard/website.png')
 
 export function ActionButtons(props) {
     function goToMaps() {
@@ -36,15 +38,15 @@ export function ActionButtons(props) {
     return (
         <View style={styles.buttons}>
             <TouchableOpacity style={styles.routeButton} onPress={goToMaps}>
-                <FontAwesome5 color={'#fff'} size={30} name={'route'}/>
+                <Image style={styles.icons} source={directionsIcon}/>
             </TouchableOpacity>
             <TouchableOpacity style={styles.routeButton} onPress={goToPhone}>
-                <FontAwesome5 color={'#fff'} size={30} name={'phone'}/>
+                <Image style={styles.phoneIcon} source={phone}/>
             </TouchableOpacity>
             {
                 props.place.website ? (
                     <TouchableOpacity style={styles.routeButton} onPress={goToWebsite}>
-                        <FontAwesome5 color={'#fff'} size={30} name={'globe'}/>
+                        <Image style={styles.webIcon} source={website}/>
                     </TouchableOpacity>
                 ) : (
                     <></>
@@ -66,5 +68,17 @@ const styles = {
     buttons: {
         flexDirection: 'row',
         justifyContent: 'space-between'
-    }
+    },
+    icons: {
+        width: '70%',
+        height: '70%',
+    },
+    phoneIcon: {
+        width: '50%',
+        height: '50%',
+    },
+    webIcon: {
+        width: '60%',
+        height: '60%',
+    },
 }
