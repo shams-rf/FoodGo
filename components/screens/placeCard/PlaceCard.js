@@ -2,6 +2,7 @@ import React from 'react';
 import {Text, View} from "react-native";
 import {ActionButtons} from "./ActionButtons";
 import {ImageSlider} from "./ImageSlider";
+import {FavouriteHeart} from "./FavouriteHeart";
 
 export function PlaceCard(props) {
     if(props.place === null) {
@@ -13,7 +14,10 @@ export function PlaceCard(props) {
     } else {
         return (
             <View style={styles.container}>
-                <Text style={styles.title}>{props.place.name}</Text>
+                <View style={styles.titleAndFavContainer}>
+                    <Text style={styles.title}>{props.place.name}</Text>
+                    <FavouriteHeart place={props.place}/>
+                </View>
                 <ActionButtons place={props.place}/>
                 <ImageSlider place={props.place}/>
             </View>
@@ -22,6 +26,11 @@ export function PlaceCard(props) {
 }
 
 const styles = {
+    titleAndFavContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
     container: {
         paddingLeft: 20,
         paddingRight: 20,
@@ -29,7 +38,6 @@ const styles = {
     },
     title: {
         fontSize: 22,
-        // fontWeight: 600,
         fontFamily: 'ComfortaaBold'
     },
     quickInfoBox: {

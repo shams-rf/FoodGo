@@ -1,7 +1,8 @@
 import React, {useRef, useState} from 'react';
 import {ActivityIndicator, Button, TextInput, View} from "react-native";
-import {FIREBASE_AUTH} from "../../config/Firebase";
-import {signInWithEmailAndPassword, createUserWithEmailAndPassword} from 'firebase/auth';
+import {FIREBASE_AUTH, FIREBASE_DB} from "../../config/Firebase";
+import {signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth} from 'firebase/auth';
+import {setDoc, doc} from 'firebase/firestore';
 
 export function Login() {
     const auth = FIREBASE_AUTH
@@ -10,11 +11,14 @@ export function Login() {
     const [loading, setLoading] = useState(false)
     const passwordRef = useRef(null)
 
+    function getUser() {
+        return getAuth().currentUser.uid
+    }
+
     async function login() {
         setLoading(true)
         try {
-            const response = await signInWithEmailAndPassword(auth, email, password)
-            console.log(response)
+            await signInWithEmailAndPassword(auth, email, password)
         } catch (error) {
             console.log(error)
         } finally {
@@ -25,8 +29,11 @@ export function Login() {
     async function signup() {
         setLoading(true)
         try {
-            const response = await createUserWithEmailAndPassword(auth, email, password)
-            console.log(response)
+            await createUserWithEmailAndPassword(auth, email, password)
+
+            const docData = {favourites: []}
+            const docRef = doc(FIREBASE_DB, 'users', getUser())
+            await setDoc(docRef, docData)
         } catch (error) {
             console.log(error)
         } finally {
