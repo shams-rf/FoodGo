@@ -8,7 +8,7 @@ export function PlaceCard(props) {
     if(props.place === null) {
         return (
             <View>
-                <Text>Hi</Text>
+                <Text>Hello</Text>
             </View>
         )
     } else {
@@ -16,7 +16,7 @@ export function PlaceCard(props) {
             <View style={styles.container}>
                 <View style={styles.titleAndFavContainer}>
                     <Text style={styles.title}>{props.place.name}</Text>
-                    <FavouriteHeart place={props.place}/>
+                    <FavouriteHeart user={props.user} place={props.place}/>
                 </View>
                 <ActionButtons place={props.place}/>
                 <ImageSlider place={props.place}/>
