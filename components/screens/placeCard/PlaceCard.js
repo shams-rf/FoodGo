@@ -18,6 +18,7 @@ export function PlaceCard(props) {
                     <Text style={styles.title}>{props.place.name}</Text>
                     <FavouriteHeart user={props.user} place={props.place}/>
                 </View>
+                <Text style={styles.address}>{props.place.address}</Text>
                 <ActionButtons place={props.place}/>
                 <ImageSlider place={props.place}/>
             </View>
@@ -38,11 +39,15 @@ const styles = {
     },
     title: {
         fontSize: 22,
-        fontFamily: 'ComfortaaBold'
+        fontFamily: 'bold'
     },
     quickInfoBox: {
         flexDirection: 'row',
         alignItems: 'center',
         justifyContent: 'space-between'
     },
+    address: {
+        fontSize: 16,
+        fontFamily: 'medium'
+    }
 }
