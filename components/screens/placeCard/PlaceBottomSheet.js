@@ -24,7 +24,7 @@ export function PlaceBottomSheet(props) {
                 index={0}
                 backgroundStyle={{borderRadius: 50, backgroundColor: '#fff'}}
             >
-                <PlaceCard location={props.location} place={props.place}/>
+                <PlaceCard user={props.user} location={props.location} place={props.place}/>
             </BottomSheetModal>
         </View>
     );

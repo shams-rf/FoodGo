@@ -7,15 +7,23 @@ import {PlaceBottomSheet} from "../placeCard/PlaceBottomSheet";
 import {BottomSheetModalProvider} from "@gorhom/bottom-sheet";
 import {GestureHandlerRootView} from "react-native-gesture-handler";
 import {collection, getDocs, query, where, orderBy, limit} from "firebase/firestore";
-import {FIREBASE_DB} from "../../../config/Firebase";
+import {FIREBASE_AUTH, FIREBASE_DB} from "../../../config/Firebase";
 import { GeoPoint } from 'firebase/firestore';
+import {onAuthStateChanged} from "firebase/auth";
 
 export function MapScreen(props) {
     const [data, setData] = useState([])
     const [spot, setSpot] = useState(null)
     const [marker, setMarker] = useState(null)
+    const [user, setUser] = useState(null)
 
     const userLocation = new GeoPoint(props.location.coords.latitude, props.location.coords.longitude)
+
+    useEffect(() => {
+        onAuthStateChanged(FIREBASE_AUTH, (user) => {
+            setUser(user)
+        })
+    })
 
     useEffect( () => {
         (async () => {
@@ -70,7 +78,7 @@ export function MapScreen(props) {
                         })}
                     </MapView>
                     <LocateMeButton mapView={this.mapView} location={props.location}/>
-                    <PlaceBottomSheet location={props.location} place={spot}/>
+                    <PlaceBottomSheet location={props.location} place={spot} user={user}/>
                 </View>
             </BottomSheetModalProvider>
         </GestureHandlerRootView>

@@ -4,7 +4,6 @@ import {Login} from "./Login";
 import {Favourites} from "./Favourites";
 import {onAuthStateChanged} from 'firebase/auth'
 import {FIREBASE_AUTH} from "../../config/Firebase";
-import {List} from "./List";
 import {NavigationContainer} from "@react-navigation/native";
 
 export function Main() {
@@ -26,7 +25,6 @@ export function Main() {
                 ) : (
                     <Stack.Screen name={'Login'} component={Login}/>
                 )}
-                <Stack.Screen name={'List'} component={List}/>
             </Stack.Navigator>
         </NavigationContainer>
     );

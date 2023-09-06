@@ -65,6 +65,7 @@ export function Home() {
                         }
                     }} name={'MapScreen'} children={() => <MapScreen location={location}/>}/>
                     <Tab.Screen options={{
+                        unmountOnBlur: true,
                         tabBarIcon: ({focused}) => {
                             if(focused) {
                                 return (
@@ -76,7 +77,7 @@ export function Home() {
                                 )
                             }
                         }
-                    }} name={'Settings'} children={() => <Main/>}/>
+                    }} name={'Favourites'} children={() => <Main/>}/>
                 </Tab.Navigator>
             </NavigationContainer>
         )
