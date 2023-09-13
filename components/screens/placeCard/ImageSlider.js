@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {Image, View} from "react-native";
 import {FIREBASE_STORAGE} from '../../../config/Firebase'
 import {ref, listAll, getDownloadURL} from 'firebase/storage';
@@ -26,17 +26,29 @@ export function ImageSlider(props) {
             .catch((error) => {console.log(error)})
     }, [props.place])
 
-    if(!images) {
+    const memoizedImages = useMemo(() => images, [images]);
+
+    if(!memoizedImages || memoizedImages.length === 0) {
         return null
     } else {
         return (
-            <View>
-                {images.map((image) => {
+            <View style={styles.container}>
+                {memoizedImages.map((image) => {
                     return (
-                        <Image key={image} style={{width:100, height:100}} source={{uri: image}}/>
+                        <Image key={image} style={styles.image} source={{uri: image}}/>
                     )
                 })}
             </View>
         );
+    }
+}
+
+const styles = {
+    container: {
+        flex: 1
+    },
+    image: {
+        width: '40%',
+        height: 200
     }
 }

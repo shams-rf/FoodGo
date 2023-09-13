@@ -5,13 +5,14 @@ import {PlaceCard} from "./PlaceCard";
 
 export function PlaceBottomSheet(props) {
     const bottomSheetRef = useRef(null)
-    const snapPoints = ['10%', '40%', '95%']
+    const snapPoints = ['40%', '94%']
 
     useEffect(() => {
         if(props.place === null) {
-            bottomSheetRef.current?.present()
+            bottomSheetRef.current?.dismiss()
         } else {
-            bottomSheetRef.current?.snapToIndex(1)
+            bottomSheetRef.current?.present()
+            bottomSheetRef.current?.snapToIndex(0)
         }
     }, [props.place])
 
