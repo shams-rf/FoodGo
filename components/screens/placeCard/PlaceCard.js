@@ -6,11 +6,7 @@ import {FavouriteHeart} from "./FavouriteHeart";
 
 export function PlaceCard(props) {
     if(props.place === null) {
-        return (
-            <View>
-                <Text>Hello</Text>
-            </View>
-        )
+        return null
     } else {
         return (
             <View style={styles.container}>
