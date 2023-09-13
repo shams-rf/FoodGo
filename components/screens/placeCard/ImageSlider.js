@@ -2,6 +2,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {Image, View} from "react-native";
 import {FIREBASE_STORAGE} from '../../../config/Firebase'
 import {ref, listAll, getDownloadURL} from 'firebase/storage';
+import {FlatList} from "react-native-gesture-handler";
 
 export function ImageSlider(props) {
     const [images, setImages] = useState([])
@@ -33,11 +34,18 @@ export function ImageSlider(props) {
     } else {
         return (
             <View style={styles.container}>
-                {memoizedImages.map((image) => {
-                    return (
-                        <Image key={image} style={styles.image} source={{uri: image}}/>
-                    )
-                })}
+                <FlatList
+                    showsHorizontalScrollIndicator={false}
+                    horizontal
+                    data={memoizedImages}
+                    keyExtractor={(item, index) => index.toString()}
+                    renderItem={({ item }) => (
+                        <Image
+                            style={styles.image}
+                            source={{ uri: item }}
+                        />
+                    )}
+                />
             </View>
         );
     }
@@ -45,10 +53,12 @@ export function ImageSlider(props) {
 
 const styles = {
     container: {
-        flex: 1
+        flexDirection: 'row',
     },
     image: {
-        width: '40%',
-        height: 200
-    }
+        width: 200,
+        height: 200,
+        marginRight: 10,
+        borderRadius: 15
+    },
 }
