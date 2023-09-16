@@ -1,9 +1,12 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {Button, Text, View} from "react-native";
 import {FIREBASE_AUTH, FIREBASE_DB} from "../../config/Firebase";
 import {doc, getDoc} from "firebase/firestore";
 import {Card} from "./favourites/Card";
 import {getAuth} from "firebase/auth";
+import {SafeAreaView} from 'react-native-safe-area-context';
+import {FlatList} from "react-native-gesture-handler";
+import {colours} from "../../config/Colours";
 
 export function Favourites() {
     const [places, setPlaces] = useState(null)
@@ -42,23 +45,44 @@ export function Favourites() {
             .catch((error) => console.log(error))
     }
 
+    const memorizedPlaces = useMemo(() => places, [places])
+
     if(loading || !places) {
         return (
-            <View>
+            <SafeAreaView>
                 <Text>{message}</Text>
                 <Button title={'Sign out'} onPress={signout}/>
-            </View>
+            </SafeAreaView>
         )
     } else {
         return (
-            <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                {places.map((place) => {
-                    return (
-                        <Card key={place} place={place}/>
-                    )
-                })}
-                <Button title={'Sign out'} onPress={signout}/>
-            </View>
+            <SafeAreaView style={styles.container}>
+                <Text style={styles.title}>Favourites</Text>
+                <View style={styles.list}>
+                    <FlatList
+                        data={memorizedPlaces}
+                        renderItem={({ item }) => (
+                            <Card place={item}/>
+                        )}
+                        keyExtractor={(item, index) => index.toString()}
+                    />
+                    <Button title={'Sign out'} onPress={signout}/>
+                </View>
+            </SafeAreaView>
         )
+    }
+}
+
+const styles = {
+    container: {
+        padding: 20,
+    },
+    title: {
+        fontFamily: 'bold',
+        fontSize: 32,
+        color: colours.magenta
+    },
+    list: {
+        marginTop: 20,
     }
 }

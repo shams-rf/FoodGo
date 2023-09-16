@@ -6,7 +6,7 @@ import {onAuthStateChanged} from 'firebase/auth'
 import {FIREBASE_AUTH} from "../../config/Firebase";
 import {NavigationContainer} from "@react-navigation/native";
 
-export function Main() {
+export function Authentication() {
     const [user, setUser] = useState(null)
 
     useEffect(() => {
@@ -19,7 +19,9 @@ export function Main() {
 
     return (
         <NavigationContainer independent>
-            <Stack.Navigator>
+            <Stack.Navigator screenOptions={{
+                headerShown: false,
+            }}>
                 {user ? (
                     <Stack.Screen name={'Favourites'} component={Favourites}/>
                 ) : (
