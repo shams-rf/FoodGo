@@ -33,14 +33,15 @@ export function Card(props) {
     }, [])
 
     const memorizedImage = useMemo(() => image, [image])
+    const memorizedRestaurant = useMemo(() => restaurant, [restaurant])
 
     if(!restaurant) {
         return null
     } else {
         return (
-            <TouchableOpacity style={styles.container}>
+            <TouchableOpacity style={styles.container} onPress={() => props.navigation.navigate('Detail View')}>
                 <Image style={styles.logo} source={{uri: memorizedImage}}/>
-                <Text style={styles.title}>{restaurant.name}</Text>
+                <Text style={styles.title}>{memorizedRestaurant.name}</Text>
             </TouchableOpacity>
         )
     }

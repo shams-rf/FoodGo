@@ -3,4 +3,5 @@ export const colours = {
     ruby: '#510a32',
     pink: '#801336',
     red: '#c72c41',
+    lightGray: '#f4f4f4'
 }

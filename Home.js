@@ -48,7 +48,8 @@ export function Home() {
                         tabBarLabelStyle: styles.tabBarText,
                         tabBarActiveTintColor: colours.pink,
                         tabBarInactiveTintColor: 'gray',
-                        tabBarShowLabel: false
+                        tabBarShowLabel: false,
+                        tabBarStyle: styles.tabBar
                     }
                 }>
                     <Tab.Screen options={{
@@ -96,5 +97,14 @@ const styles = {
     icons: {
         width: 30,
         height: 30
+    },
+    tabBar: {
+        borderRadius: 30,
+        position: 'absolute',
+        bottom: 20,
+        left: 20,
+        right: 20,
+        elevation: 0,
+        height: 60
     }
 }

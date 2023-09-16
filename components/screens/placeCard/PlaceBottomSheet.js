@@ -2,6 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import {View} from "react-native";
 import {BottomSheetModal} from "@gorhom/bottom-sheet";
 import {PlaceCard} from "./PlaceCard";
+import {colours} from "../../../config/Colours";
 
 export function PlaceBottomSheet(props) {
     const bottomSheetRef = useRef(null)
@@ -23,7 +24,7 @@ export function PlaceBottomSheet(props) {
                 snapPoints={snapPoints}
                 ref={bottomSheetRef}
                 index={0}
-                backgroundStyle={{borderRadius: 50, backgroundColor: '#fff'}}
+                backgroundStyle={{borderRadius: 50, backgroundColor: colours.lightGray}}
             >
                 <PlaceCard user={props.user} location={props.location} place={props.place}/>
             </BottomSheetModal>

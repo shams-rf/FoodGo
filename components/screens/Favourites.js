@@ -8,10 +8,10 @@ import {SafeAreaView} from 'react-native-safe-area-context';
 import {FlatList} from "react-native-gesture-handler";
 import {colours} from "../../config/Colours";
 
-export function Favourites() {
+export function Favourites({navigation}) {
     const [places, setPlaces] = useState(null)
     const [loading, setLoading] = useState(false)
-    const [message, setMessage] = useState('Loading')
+    const [message, setMessage] = useState('Loading...')
 
     function getUser() {
         return getAuth().currentUser.uid
@@ -47,10 +47,10 @@ export function Favourites() {
 
     const memorizedPlaces = useMemo(() => places, [places])
 
-    if(loading || !places) {
+    if(loading) {
         return (
-            <SafeAreaView>
-                <Text>{message}</Text>
+            <SafeAreaView style={styles.messageContainer}>
+                <Text style={styles.messageText}>{message}</Text>
                 <Button title={'Sign out'} onPress={signout}/>
             </SafeAreaView>
         )
@@ -62,7 +62,7 @@ export function Favourites() {
                     <FlatList
                         data={memorizedPlaces}
                         renderItem={({ item }) => (
-                            <Card place={item}/>
+                            <Card place={item} navigation={navigation}/>
                         )}
                         keyExtractor={(item, index) => index.toString()}
                     />
@@ -84,5 +84,14 @@ const styles = {
     },
     list: {
         marginTop: 20,
+    },
+    messageContainer: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center'
+    },
+    messageText: {
+        fontFamily: 'regular',
+        fontSize: 20,
     }
 }
