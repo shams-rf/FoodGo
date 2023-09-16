@@ -105,6 +105,7 @@ const styles = {
         left: 20,
         right: 20,
         elevation: 0,
-        height: 60
+        height: 60,
+        paddingTop: Platform.OS === 'ios' ? 30 : 0
     }
 }
