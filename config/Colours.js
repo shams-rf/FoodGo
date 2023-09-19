@@ -1,6 +1,7 @@
 export const colours = {
-    green: '#2d142c',
-    forestGreen: '#510a32',
-    limeGreen: '#801336',
-    leafGreen: '#c72c41',
+    magenta: '#2d142c',
+    ruby: '#510a32',
+    pink: '#801336',
+    red: '#c72c41',
+    lightGray: '#f4f4f4'
 }

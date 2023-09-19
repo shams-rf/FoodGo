@@ -5,7 +5,7 @@ import {MapScreen} from "./components/screens/mapScreen/MapScreen";
 import {SplashScreen} from "./components/screens/splashScreen/SplashScreen";
 import {createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import {NavigationContainer} from "@react-navigation/native";
-import {Main} from "./components/screens/Main";
+import {Authentication} from "./components/screens/Authentication";
 import {Image, Platform} from "react-native";
 import {colours} from "./config/Colours";
 const mapIcon = require('./assets/tabs/map.png')
@@ -46,9 +46,10 @@ export function Home() {
                     {
                         headerShown: false,
                         tabBarLabelStyle: styles.tabBarText,
-                        tabBarActiveTintColor: colours.limeGreen,
+                        tabBarActiveTintColor: colours.pink,
                         tabBarInactiveTintColor: 'gray',
-                        tabBarShowLabel: false
+                        tabBarShowLabel: false,
+                        tabBarStyle: styles.tabBar
                     }
                 }>
                     <Tab.Screen options={{
@@ -77,7 +78,7 @@ export function Home() {
                                 )
                             }
                         }
-                    }} name={'Favourites'} children={() => <Main/>}/>
+                    }} name={'Favourites'} children={() => <Authentication/>}/>
                 </Tab.Navigator>
             </NavigationContainer>
         )
@@ -96,5 +97,15 @@ const styles = {
     icons: {
         width: 30,
         height: 30
+    },
+    tabBar: {
+        borderRadius: 30,
+        position: 'absolute',
+        bottom: 20,
+        left: 20,
+        right: 20,
+        elevation: 0,
+        height: 60,
+        paddingTop: Platform.OS === 'ios' ? 30 : 0
     }
 }
