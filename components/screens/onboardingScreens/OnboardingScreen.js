@@ -1,7 +1,10 @@
 import React from 'react';
-import {Image, Platform, View} from "react-native";
+import {Image, View} from "react-native";
 import Onboarding from "react-native-onboarding-swiper";
 import {DoneButton} from "./DoneButton";
+import {NextButton} from "./NextButton";
+import {Title} from "./Title";
+import {Subtitle} from "./Subtitle";
 const chipsImg = require('../../../assets/onboarding/chips.gif')
 const likeImg = require('../../../assets/onboarding/done.gif')
 
@@ -9,25 +12,27 @@ export function OnboardingScreen({navigation}) {
     return (
         <View style={styles.container}>
             <Onboarding
+                containerStyles={{bottom: '10%'}}
+                bottomBarHeight={150}
+                NextButtonComponent={NextButton}
                 DoneButtonComponent={DoneButton}
                 onDone={() => navigation.replace('Home')}
                 showSkip={false}
                 titleStyles={styles.title}
                 subTitleStyles={styles.subtitle}
                 bottomBarHighlight={false}
-                showNext={false}
                 pages={[
                 {
-                    backgroundColor: '#ff5c5c',
+                    backgroundColor: '#fff',
                     image: <Image style={styles.image} source={chipsImg} />,
-                    title: 'Welcome to Halalicious',
-                    subtitle: 'All your favourite food in one place',
+                    title: <Title title={'Welcome to Halalicious'}/>,
+                    subtitle: <Subtitle text={'All your favourite food in one place'}/>,
                 },
                 {
-                    backgroundColor: '#a30000',
+                    backgroundColor: '#fff',
                     image: <Image style={styles.image} source={likeImg} />,
-                    title: 'Ready to go',
-                    subtitle: 'Enable location access to show places near you',
+                    title: <Title title={'Ready to go'}/>,
+                    subtitle: <Subtitle text={'Enable location access to show places near you'}/>,
                 }
             ]}/>
         </View>
@@ -36,19 +41,10 @@ export function OnboardingScreen({navigation}) {
 
 const styles = {
     container: {
-        flex: 1
+        flex: 1,
     },
     image: {
-        width: 300,
-        height: 300
-    },
-    title: {
-        fontSize: 32,
-        fontWeight: 'bold',
-        fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
-    },
-    subtitle: {
-        fontSize: 16,
-        fontFamily: (Platform.OS === 'ios') ? 'Avenir' : 'Roboto',
+        width: 200,
+        height: 200
     }
 }

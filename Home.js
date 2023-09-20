@@ -46,7 +46,7 @@ export function Home() {
                     {
                         headerShown: false,
                         tabBarLabelStyle: styles.tabBarText,
-                        tabBarActiveTintColor: colours.pink,
+                        tabBarActiveTintColor: colours.red,
                         tabBarInactiveTintColor: 'gray',
                         tabBarShowLabel: false,
                         tabBarStyle: styles.tabBar
