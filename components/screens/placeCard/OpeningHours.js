@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Text, View} from "react-native";
+import {Platform, Text, View} from "react-native";
 
 export function OpeningHours(props) {
     const [day, setDay] = useState(null)
@@ -24,7 +24,7 @@ export function OpeningHours(props) {
 
 const styles = {
     container: {
-        gap: 5,
+        gap: Platform.OS === 'ios' ? 10 : 5
     },
     hours: {
         fontSize: 14,
