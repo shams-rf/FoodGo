@@ -66,6 +66,10 @@ export function FavouriteHeart(props) {
         }
     }
 
+    if(!getUser()) {
+        return null
+    }
+
     if(isFavourite) {
         return (
             <TouchableOpacity style={styles.button} onPress={removeFavourite}>

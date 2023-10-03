@@ -2,9 +2,12 @@ import React from 'react';
 import {Image, Text, TouchableOpacity, View} from "react-native";
 import {Dimensions} from 'react-native';
 import {colours} from "../../../config/Colours";
+import {OpeningHours} from "../placeCard/OpeningHours";
 const marker = require('../../../assets/detailView/mapMarker.png')
 const phone = require('../../../assets/detailView/phone.png')
 const website = require('../../../assets/detailView/website.png')
+const clock = require('../../../assets/detailView/clock.png')
+const islam = require('../../../assets/detailView/islam.png')
 
 export function DetailView({route}) {
     const {restaurant, image} = route.params
@@ -15,12 +18,12 @@ export function DetailView({route}) {
             <Image style={{width: windowWidth, height: 300}} source={{uri: image}}/>
             <View style={styles.rectangleContainer}>
                 <Text style={styles.title}>{restaurant.name}</Text>
-                <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+                <View style={styles.container2}>
                     <Image style={{width: 20, height: 20}} source={marker}/>
                     <Text style={styles.text}>{restaurant.address}</Text>
                 </View>
-                <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+                <View style={styles.container1}>
+                    <View style={styles.container2}>
                         <Image style={{width: 20, height: 20}} source={phone}/>
                         <Text style={styles.text}>{restaurant.phone}</Text>
                     </View>
@@ -28,13 +31,26 @@ export function DetailView({route}) {
                         <Text style={styles.buttonText}>Call</Text>
                     </TouchableOpacity>
                 </View>
-                <View style={{justifyContent: 'space-between', flexDirection: 'row'}}>
-                    <View style={{flexDirection: 'row', alignItems: 'center', gap: 10}}>
+                <View style={styles.container1}>
+                    <View style={styles.container2}>
                         <Image style={{width: 20, height: 20}} source={website}/>
                         <Text style={styles.text}>{restaurant.website}</Text>
                     </View>
                     <TouchableOpacity style={styles.button}>
                         <Text style={styles.buttonText}>Visit</Text>
+                    </TouchableOpacity>
+                </View>
+                <View style={{gap: 10, flexDirection: 'row'}}>
+                    <Image style={{width: 20, height: 20}} source={clock}/>
+                    <OpeningHours place={restaurant}/>
+                </View>
+                <View style={styles.container1}>
+                    <View style={styles.container2}>
+                        <Image style={{width: 20, height: 20}} source={islam}/>
+                        <Text style={styles.text}>Certificate Level: {restaurant.certificate}</Text>
+                    </View>
+                    <TouchableOpacity style={styles.button}>
+                        <Text style={styles.buttonText}>View</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -52,6 +68,15 @@ const styles = {
         padding: 15,
         gap: 20,
         borderRadius: 20
+    },
+    container1: {
+        justifyContent: 'space-between',
+        flexDirection: 'row'
+    },
+    container2: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        gap: 10
     },
     title: {
         fontFamily: 'medium',
