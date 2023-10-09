@@ -43,7 +43,7 @@ export function MapScreen(props) {
 
             setData(fetchedDocs)
         })();
-    })
+    }, [])
 
     return (
         <GestureHandlerRootView style={{flex: 1}}>
