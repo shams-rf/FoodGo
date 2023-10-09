@@ -66,6 +66,8 @@ export function SignUp({navigation}) {
                 const docData = {favourites: []}
                 const docRef = doc(FIREBASE_DB, 'users', getUser())
                 await setDoc(docRef, docData)
+
+                navigation.replace('Favourites')
             } catch (error) {
                 setFirebaseError(error.message)
             } finally {

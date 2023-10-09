@@ -10,7 +10,7 @@ const website = require('../../../assets/placeCard/website.png')
 export function ActionButtons(props) {
     function goToMaps() {
         openMaps({
-            end: `${props.place.location.latitude},${props.place.location.longitude}`,
+            end: `${props.place.address}`,
             travelType: 'drive'
         })
     }

@@ -20,6 +20,7 @@ export function Favourites({navigation}) {
 
     async function getFavourites() {
         setLoading(true)
+        setMessage('Loading...')
         const docRef = doc(FIREBASE_DB, 'users', getUser())
         const docSnapshot = await getDoc(docRef)
 
