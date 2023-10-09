@@ -1,12 +1,13 @@
 import React, {useRef, useState} from 'react';
 import {ActivityIndicator, Image, Text, TextInput, TouchableOpacity, View} from "react-native";
-import {FIREBASE_AUTH} from "../../config/Firebase";
-import {signInWithEmailAndPassword} from 'firebase/auth';
+import {FIREBASE_AUTH, FIREBASE_DB} from "../../config/Firebase";
+import {createUserWithEmailAndPassword, getAuth} from 'firebase/auth';
+import {setDoc, doc} from 'firebase/firestore';
 import {colours} from "../../config/Colours";
-const logo = require('../../assets/logo.png');
 import validator from "validator";
+const logo = require('../../assets/logo.png');
 
-export function Login({navigation}) {
+export function SignUp({navigation}) {
     const auth = FIREBASE_AUTH
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
@@ -17,6 +18,10 @@ export function Login({navigation}) {
     const [passwordError, setPasswordError] = useState('')
     const [passwordValid, setPasswordValid] = useState(false)
     const [firebaseError, setFirebaseError] = useState('')
+
+    function getUser() {
+        return getAuth().currentUser.uid
+    }
 
     function validateEmail() {
         if(email.length === 0) {
@@ -48,7 +53,7 @@ export function Login({navigation}) {
         setLoading(false)
     }
 
-    async function login() {
+    async function signup() {
         setFirebaseError('')
         setLoading(true)
         validateEmail()
@@ -56,7 +61,11 @@ export function Login({navigation}) {
 
         if(!!emailValid && !!passwordValid) {
             try {
-                await signInWithEmailAndPassword(auth, email, password)
+                await createUserWithEmailAndPassword(auth, email, password)
+
+                const docData = {favourites: []}
+                const docRef = doc(FIREBASE_DB, 'users', getUser())
+                await setDoc(docRef, docData)
             } catch (error) {
                 setFirebaseError(error.message)
             } finally {
@@ -68,7 +77,7 @@ export function Login({navigation}) {
     return (
         <View style={styles.container}>
             <Image source={logo} style={styles.logo}/>
-            <Text style={styles.title}>Login</Text>
+            <Text style={styles.title}>Sign Up</Text>
             <TextInput
                 value={email}
                 placeholder={'Email'}
@@ -96,17 +105,17 @@ export function Login({navigation}) {
             ) : null}
             {loading ? <ActivityIndicator size={'large'} color={'#000'} />
                 : <>
-                    <TouchableOpacity style={styles.loginButton} onPress={login}>
-                        <Text style={styles.buttonText}>Login</Text>
+                    <TouchableOpacity style={styles.signupButton} onPress={signup}>
+                        <Text style={styles.buttonText}>Sign Up</Text>
                     </TouchableOpacity>
                 </>}
             {firebaseError ? (
                 <Text style={styles.miniText}>{firebaseError}</Text>
             ) : null}
             <View style={{flexDirection: 'row', gap: 5}}>
-                <Text style={styles.miniText}>Don't have an account?</Text>
-                <TouchableOpacity onPress={() => navigation.navigate('SignUp')}>
-                    <Text style={styles.miniTextButton}>Sign Up</Text>
+                <Text style={styles.miniText}>Already have an account?</Text>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Text style={styles.miniTextButton}>Log In</Text>
                 </TouchableOpacity>
             </View>
         </View>
@@ -141,7 +150,7 @@ const styles = {
         fontSize: 16,
         color: '#fff'
     },
-    loginButton: {
+    signupButton: {
         backgroundColor: colours.red,
         padding: 10,
         width: '80%',

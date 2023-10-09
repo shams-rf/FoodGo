@@ -7,6 +7,7 @@ import {FIREBASE_AUTH} from "../../config/Firebase";
 import {NavigationContainer} from "@react-navigation/native";
 import {DetailView} from "./detailView/DetailView";
 import {HeaderBackButton} from "./detailView/HeaderBackButton";
+import {SignUp} from "./SignUp";
 
 export function Authentication() {
     const [user, setUser] = useState(null)
@@ -37,6 +38,7 @@ export function Authentication() {
                         <HeaderBackButton navigation={navigation}/>
                     )
                 })} name={'Detail View'} component={DetailView}/>
+                <Stack.Screen name={'SignUp'} component={SignUp}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
