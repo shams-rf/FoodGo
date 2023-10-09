@@ -20,7 +20,6 @@ export function PlaceBottomSheet(props) {
     return (
         <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <BottomSheetModal
-                enablePanDownToClose={false}
                 snapPoints={snapPoints}
                 ref={bottomSheetRef}
                 index={0}

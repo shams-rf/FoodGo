@@ -15,23 +15,27 @@ export function FavouriteHeart(props) {
 
     useEffect(() => {
         async function checkFavourite() {
-            try {
-                const docRef = doc(FIREBASE_DB, 'users', props.user?.uid);
-                const docSnapshot = await getDoc(docRef);
+            if(!getUser()) {
+                return null
+            } else {
+                try {
+                    const docRef = doc(FIREBASE_DB, 'users', props.user?.uid);
+                    const docSnapshot = await getDoc(docRef);
 
-                if (docSnapshot.exists()) {
-                    const userFavourites = docSnapshot.data().favourites;
+                    if (docSnapshot.exists()) {
+                        const userFavourites = docSnapshot.data().favourites;
 
-                    if (userFavourites && userFavourites.includes(props.place.id)) {
-                        setIsFavourite(true)
+                        if (userFavourites && userFavourites.includes(props.place.id)) {
+                            setIsFavourite(true)
+                        } else {
+                            setIsFavourite(false)
+                        }
                     } else {
-                        setIsFavourite(false)
+                        console.log('User not found');
                     }
-                } else {
-                    console.log('User not found');
+                } catch (error) {
+                    console.log('Error 4: ' + error);
                 }
-            } catch (error) {
-                console.log('Error 4: ' + error);
             }
         }
 
