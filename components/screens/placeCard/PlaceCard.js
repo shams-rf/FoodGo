@@ -3,6 +3,8 @@ import {Text, View} from "react-native";
 import {ActionButtons} from "./ActionButtons";
 import {ImageSlider} from "./ImageSlider";
 import {FavouriteHeart} from "./FavouriteHeart";
+import {Divider} from "@rneui/themed";
+import {OpeningHours} from "./OpeningHours";
 
 export function PlaceCard(props) {
     if(props.place === null) {
@@ -17,6 +19,12 @@ export function PlaceCard(props) {
                 <Text style={styles.address}>{props.place.address}</Text>
                 <ActionButtons place={props.place}/>
                 <ImageSlider place={props.place}/>
+                <Divider/>
+                <Text style={styles.subtitle}>Opening hours</Text>
+                <OpeningHours place={props.place}/>
+                <Divider/>
+                <Text style={styles.subtitle}>Halal Information</Text>
+                <Text style={styles.text}>Certificate Level: {props.place.certificate}</Text>
             </View>
         )
     }
@@ -45,5 +53,13 @@ const styles = {
     address: {
         fontSize: 16,
         fontFamily: 'medium'
+    },
+    subtitle: {
+        fontSize: 20,
+        fontFamily: 'bold'
+    },
+    text: {
+        fontSize: 16,
+        fontFamily: 'regular'
     }
 }

@@ -46,7 +46,7 @@ export function Home() {
                     {
                         headerShown: false,
                         tabBarLabelStyle: styles.tabBarText,
-                        tabBarActiveTintColor: colours.pink,
+                        tabBarActiveTintColor: colours.red,
                         tabBarInactiveTintColor: 'gray',
                         tabBarShowLabel: false,
                         tabBarStyle: styles.tabBar
@@ -66,7 +66,6 @@ export function Home() {
                         }
                     }} name={'MapScreen'} children={() => <MapScreen location={location}/>}/>
                     <Tab.Screen options={{
-                        unmountOnBlur: true,
                         tabBarIcon: ({focused}) => {
                             if(focused) {
                                 return (
@@ -99,13 +98,8 @@ const styles = {
         height: 30
     },
     tabBar: {
-        borderRadius: 30,
+        borderTopRightRadius: 30,
+        borderTopLeftRadius: 30,
         position: 'absolute',
-        bottom: 20,
-        left: 20,
-        right: 20,
-        elevation: 0,
-        height: 60,
-        paddingTop: Platform.OS === 'ios' ? 30 : 0
     }
 }

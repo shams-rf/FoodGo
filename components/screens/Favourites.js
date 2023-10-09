@@ -1,5 +1,5 @@
 import React, {useEffect, useMemo, useState} from 'react';
-import {Button, Text, View} from "react-native";
+import {Button, Image, Text, TouchableOpacity, View} from "react-native";
 import {FIREBASE_AUTH, FIREBASE_DB} from "../../config/Firebase";
 import {doc, getDoc} from "firebase/firestore";
 import {Card} from "./favourites/Card";
@@ -7,6 +7,7 @@ import {getAuth} from "firebase/auth";
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {FlatList} from "react-native-gesture-handler";
 import {colours} from "../../config/Colours";
+const refresh = require('../../assets/icons/refresh.png')
 
 export function Favourites({navigation}) {
     const [places, setPlaces] = useState(null)
@@ -17,25 +18,25 @@ export function Favourites({navigation}) {
         return getAuth().currentUser.uid
     }
 
-    useEffect(() => {
-        async function getFavourites() {
-            setLoading(true)
-            const docRef = doc(FIREBASE_DB, 'users', getUser())
-            const docSnapshot = await getDoc(docRef)
+    async function getFavourites() {
+        setLoading(true)
+        const docRef = doc(FIREBASE_DB, 'users', getUser())
+        const docSnapshot = await getDoc(docRef)
 
-            if (docSnapshot.exists()) {
-                if(docSnapshot.data().favourites.length === 0) {
-                    setMessage('No favourites found')
-                } else {
-                    setPlaces(docSnapshot.data().favourites)
-                }
-                setLoading(false)
+        if (docSnapshot.exists()) {
+            if(docSnapshot.data().favourites.length === 0) {
+                setMessage('No favourites found')
             } else {
-                setMessage("User not found");
-                setLoading(false)
+                setPlaces(docSnapshot.data().favourites)
             }
+            setLoading(false)
+        } else {
+            setMessage("User not found");
+            setLoading(false)
         }
+    }
 
+    useEffect(() => {
         getFavourites().then().catch((error) => console.log(error))
     }, [])
 
@@ -51,13 +52,17 @@ export function Favourites({navigation}) {
         return (
             <SafeAreaView style={styles.messageContainer}>
                 <Text style={styles.messageText}>{message}</Text>
-                <Button title={'Sign out'} onPress={signout}/>
             </SafeAreaView>
         )
     } else {
         return (
             <SafeAreaView style={styles.container}>
-                <Text style={styles.title}>Favourites</Text>
+                <View style={styles.header}>
+                    <Text style={styles.title}>Favourites</Text>
+                    <TouchableOpacity onPress={getFavourites}>
+                        <Image style={{width: 25, height: 25}} source={refresh}/>
+                    </TouchableOpacity>
+                </View>
                 <View style={styles.list}>
                     <FlatList
                         data={memorizedPlaces}
@@ -74,6 +79,11 @@ export function Favourites({navigation}) {
 }
 
 const styles = {
+    header: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        alignItems: 'center'
+    },
     container: {
         padding: 20,
     },

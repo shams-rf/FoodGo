@@ -1,11 +1,11 @@
-import React from 'react';
 import {Text, TouchableOpacity} from "react-native";
+import React from "react";
 import {colours} from "../../../config/Colours";
 
-export function DoneButton({ ...props }) {
+export function NextButton({ ...props }) {
     return (
         <TouchableOpacity {...props} style={styles.container}>
-            <Text style={styles.text}>Let's Go</Text>
+            <Text style={styles.text}>Next</Text>
         </TouchableOpacity>
     );
 }

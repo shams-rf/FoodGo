@@ -1,8 +1,10 @@
 import React, {useRef, useState} from 'react';
-import {ActivityIndicator, Button, TextInput, View} from "react-native";
+import {ActivityIndicator, Image, Text, TextInput, TouchableOpacity, View} from "react-native";
 import {FIREBASE_AUTH, FIREBASE_DB} from "../../config/Firebase";
 import {signInWithEmailAndPassword, createUserWithEmailAndPassword, getAuth} from 'firebase/auth';
 import {setDoc, doc} from 'firebase/firestore';
+import {colours} from "../../config/Colours";
+const logo = require('../../assets/logo.png');
 
 export function Login() {
     const auth = FIREBASE_AUTH
@@ -42,7 +44,9 @@ export function Login() {
     }
 
     return (
-        <View style={{flex: 1, justifyContent: 'center', alignItems: 'center', gap: 20}}>
+        <View style={styles.container}>
+            <Image source={logo} style={styles.logo}/>
+            <Text style={styles.title}>Login or Sign Up</Text>
             <TextInput
                 value={email}
                 placeholder={'Email'}
@@ -64,18 +68,64 @@ export function Login() {
                 onChangeText={(text) => setPassword(text)}/>
             {loading ? <ActivityIndicator size={'large'} color={'#000'} />
             : <>
-                <Button title={'Login'} onPress={login}/>
-                <Button title={'Create account'} onPress={signup}/>
+                <TouchableOpacity style={styles.loginButton} onPress={login}>
+                    <Text style={styles.buttonText}>Login</Text>
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.registerButton} onPress={signup}>
+                    <Text style={styles.registerButtonText}>Sign Up</Text>
+                </TouchableOpacity>
             </>}
         </View>
     );
 }
 
 const styles = {
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+        alignItems: 'center',
+        gap: 20,
+        bottom: '5%'
+    },
     textInput: {
-        borderWidth: 1,
         width: '80%',
         backgroundColor: '#fff',
-        padding: 10
-    }
+        padding: 10,
+        borderRadius: 20,
+        fontFamily: 'medium',
+    },
+    logo: {
+        width: 200,
+        height: 200
+    },
+    title: {
+        fontFamily: 'medium',
+        fontSize: 20
+    },
+    buttonText: {
+        fontFamily: 'bold',
+        fontSize: 16,
+        color: '#fff'
+    },
+    loginButton: {
+        backgroundColor: colours.red,
+        padding: 10,
+        width: '80%',
+        borderRadius: 20,
+        alignItems: 'center'
+    },
+    registerButton: {
+        borderColor: colours.red,
+        borderWidth: 2,
+        padding: 10,
+        width: '80%',
+        borderRadius: 20,
+        alignItems: 'center',
+        backgroundColor: '#fff'
+    },
+    registerButtonText: {
+        fontFamily: 'bold',
+        fontSize: 16,
+        color: colours.red
+    },
 }

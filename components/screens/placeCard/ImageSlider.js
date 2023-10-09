@@ -66,8 +66,8 @@ const styles = {
         flexDirection: 'row',
     },
     image: {
-        width: 200,
-        height: 200,
+        width: 180,
+        height: 180,
         marginRight: 10,
         borderRadius: 15
     },

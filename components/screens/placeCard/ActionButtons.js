@@ -46,7 +46,7 @@ export function ActionButtons(props) {
             {
                 props.place.website ? (
                     <TouchableOpacity style={styles.routeButton} onPress={goToWebsite}>
-                        <Image style={styles.webIcon} source={website}/>
+                        <Image style={styles.icons} source={website}/>
                     </TouchableOpacity>
                 ) : (
                     <></>
@@ -59,9 +59,9 @@ export function ActionButtons(props) {
 const styles = {
     routeButton: {
         borderRadius: 50,
-        backgroundColor: colours.pink,
-        width: 60,
-        height: 60,
+        backgroundColor: colours.red,
+        width: 55,
+        height: 55,
         alignItems: 'center',
         justifyContent: 'center'
     },
@@ -70,15 +70,11 @@ const styles = {
         justifyContent: 'space-between'
     },
     icons: {
-        width: '70%',
-        height: '70%',
+        width: '60%',
+        height: '60%',
     },
     phoneIcon: {
         width: '50%',
         height: '50%',
-    },
-    webIcon: {
-        width: '60%',
-        height: '60%',
-    },
+    }
 }

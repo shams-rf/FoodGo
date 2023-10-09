@@ -39,7 +39,12 @@ export function Card(props) {
         return null
     } else {
         return (
-            <TouchableOpacity style={styles.container} onPress={() => props.navigation.navigate('Detail View')}>
+            <TouchableOpacity style={styles.container} onPress={
+                () => props.navigation.navigate('Detail View', {
+                    restaurant: memorizedRestaurant,
+                    image: memorizedImage
+                })
+            }>
                 <Image style={styles.logo} source={{uri: memorizedImage}}/>
                 <Text style={styles.title}>{memorizedRestaurant.name}</Text>
             </TouchableOpacity>

@@ -5,7 +5,8 @@ import {Favourites} from "./Favourites";
 import {onAuthStateChanged} from 'firebase/auth'
 import {FIREBASE_AUTH} from "../../config/Firebase";
 import {NavigationContainer} from "@react-navigation/native";
-import {DetailView} from "./DetailView";
+import {DetailView} from "./detailView/DetailView";
+import {HeaderBackButton} from "./detailView/HeaderBackButton";
 
 export function Authentication() {
     const [user, setUser] = useState(null)
@@ -28,7 +29,14 @@ export function Authentication() {
                 ) : (
                     <Stack.Screen name={'Login'} component={Login}/>
                 )}
-                <Stack.Screen name={'Detail View'} component={DetailView}/>
+                <Stack.Screen options={ ({navigation}) => ({
+                    headerShown: true,
+                    title: '',
+                    headerTransparent: true,
+                    headerLeft: () => (
+                        <HeaderBackButton navigation={navigation}/>
+                    )
+                })} name={'Detail View'} component={DetailView}/>
             </Stack.Navigator>
         </NavigationContainer>
     );
